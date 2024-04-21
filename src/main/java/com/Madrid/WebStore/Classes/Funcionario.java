@@ -1,4 +1,5 @@
 package com.Madrid.WebStore.Classes;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -63,5 +64,3 @@ public class Funcionario {
         this.produto = produto;
     }
 }
-
-

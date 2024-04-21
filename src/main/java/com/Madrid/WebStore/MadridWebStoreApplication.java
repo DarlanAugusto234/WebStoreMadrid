@@ -1,5 +1,6 @@
 package com.Madrid.WebStore;
 
+import com.Madrid.WebStore.Classes.Cliente;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
