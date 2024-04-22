@@ -14,6 +14,8 @@ public class Funcionario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private String nomeFuncionario;
+
     private String emailFuncionario;
 
     private String senhaFuncionario;
@@ -21,12 +23,9 @@ public class Funcionario {
     @OneToOne
     private Produto produto;
 
-    // Construtor padrão
-    public Funcionario() {
-    }
-
     // Construtor com todos os atributos
-    public Funcionario(String emailFuncionario, String senhaFuncionario) {
+    public Funcionario(String nomeFuncionario, String emailFuncionario, String senhaFuncionario) {
+        this.nomeFuncionario = nomeFuncionario;
         this.emailFuncionario = emailFuncionario;
         this.senhaFuncionario = senhaFuncionario;
     }
@@ -63,4 +62,6 @@ public class Funcionario {
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
+
+
 }

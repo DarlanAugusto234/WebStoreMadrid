@@ -1,7 +1,10 @@
 package com.Madrid.WebStore.Classes;
 
-import java.util.Date;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 
+import java.util.Date;
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Cadastro {
 
     private String nome;

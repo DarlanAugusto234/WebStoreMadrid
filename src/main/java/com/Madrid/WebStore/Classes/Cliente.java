@@ -1,11 +1,9 @@
 package com.Madrid.WebStore.Classes;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Cliente extends Cadastro {
@@ -17,6 +15,11 @@ public class Cliente extends Cadastro {
     private String email_cliente;
 
     private String senha_cliente;
+
+    private Double saldoDaConta;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Produto> produto;
 
     public Cliente(String nome, Date dataNascimento, String endereco, String telefone, String cpf, String email_cliente, String senha_cliente) {
         super(nome, dataNascimento, endereco, telefone, cpf);
@@ -46,5 +49,13 @@ public class Cliente extends Cadastro {
 
     public void setSenha_cliente(String senha_cliente) {
         this.senha_cliente = senha_cliente;
+    }
+
+    public List<Produto> getProduto() {
+        return produto;
+    }
+
+    public void setProduto(List<Produto> produto) {
+        this.produto = produto;
     }
 }
