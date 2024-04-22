@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 public class Produto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;

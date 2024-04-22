@@ -6,37 +6,23 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 
+import java.util.Date;
 
 @Entity
-public class Funcionario {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    private String nomeFuncionario;
+public class Funcionario extends Pessoa {
 
     private String emailFuncionario;
 
     private String senhaFuncionario;
 
-    @OneToOne
-    private Produto produto;
+    public Funcionario() {
+    }
 
     // Construtor com todos os atributos
-    public Funcionario(String nomeFuncionario, String emailFuncionario, String senhaFuncionario) {
-        this.nomeFuncionario = nomeFuncionario;
+    public Funcionario(String nome, Date dataNascimento, String endereco, String telefone, String cpf, String emailFuncionario, String senhaFuncionario) {
+        super(nome, dataNascimento, endereco, telefone, cpf);
         this.emailFuncionario = emailFuncionario;
         this.senhaFuncionario = senhaFuncionario;
-    }
-
-    // Getters e Setters
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getEmailFuncionario() {
@@ -54,14 +40,5 @@ public class Funcionario {
     public void setSenhaFuncionario(String senhaFuncionario) {
         this.senhaFuncionario = senhaFuncionario;
     }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
 
 }

@@ -4,17 +4,21 @@ import com.Madrid.WebStore.Classes.Cliente;
 import com.Madrid.WebStore.Classes.Produto;
 import com.Madrid.WebStore.Repositorios.ClienteRepository;
 import com.Madrid.WebStore.Repositorios.ProdutoRepositorio;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
 @Service
 public class ClienteService {
 
-     ClienteRepository clienteRepository;
+    ClienteRepository clienteRepository;
 
-     ProdutoRepositorio produtoRepositorio;
+    ProdutoRepositorio produtoRepositorio;
 
+    @Autowired
     public ClienteService(ClienteRepository clienteRepository, ProdutoRepositorio produtoRepositorio) {
         this.clienteRepository = clienteRepository;
         this.produtoRepositorio = produtoRepositorio;
@@ -25,10 +29,10 @@ public class ClienteService {
         clienteRepository.save(cliente);
     }
 
-    // Buscar Pelo Id do Cliente
-    public Cliente buscarClientePorId(Integer id) {
-        return clienteRepository.findById(id).orElse(null);
+    public List<Cliente> listarCliente(){
+        return clienteRepository.findAll();
     }
+
 
     // Deletar Cliente pelo Id
     public void deletarCliente(Integer id){

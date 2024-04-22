@@ -17,19 +17,19 @@ public class ClienteController {
         this.clienteService = clienteService;
     }
 
-    // Cadastro e Atualização do Cliente
+    // Cadastro e Atualização do Cliente (Funcionando)
     @PostMapping("/cadastrarCliente")
     public void cadastrarCliente(@Valid @RequestBody Cliente cliente) {
         clienteService.cadastrarCliente(cliente);
     }
 
-    // Buscar Cliente pelo Id (Metódo criado para ver o Cliente)
-    @GetMapping("/buscarCliente/{id}")
-    public Cliente buscarClientePorId(@PathVariable Integer id) {
-        return clienteService.buscarClientePorId(id);
+    // Buscar Cliente pelo Id (Metódo criado para ver o Cliente) (Funcionando)
+    @GetMapping("/buscarCliente")
+    public List<Cliente> buscarCliente() {
+        return clienteService.listarCliente();
     }
 
-    // Deletar Clinte ou Excluir Conta
+    // Deletar Cliente ou Excluir Conta (Funcionando)
     @DeleteMapping("/deletarCliente/{id}")
     public void deletarCliente(@PathVariable Integer id) {
         clienteService.deletarCliente(id);

@@ -1,11 +1,17 @@
 package com.Madrid.WebStore.Classes;
 
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
+import jakarta.persistence.*;
 
 import java.util.Date;
-@Inheritance(strategy = InheritanceType.JOINED)
-public class Cadastro {
+
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Entity
+public class Pessoa {
+
+
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    private Integer id;
 
     private String nome;
 
@@ -17,12 +23,23 @@ public class Cadastro {
 
     private String cpf;
 
-    public Cadastro(String nome, Date dataNascimento, String endereco, String telefone, String cpf) {
+    public Pessoa() {
+    }
+
+    public Pessoa(String nome, Date dataNascimento, String endereco, String telefone, String cpf) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.endereco = endereco;
         this.telefone = telefone;
         this.cpf = cpf;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {
