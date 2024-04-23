@@ -2,7 +2,6 @@ package com.Madrid.WebStore.Service;
 
 import com.Madrid.WebStore.Classes.Produto;
 import com.Madrid.WebStore.Repositorios.ProdutoRepositorio;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Madrid.WebStore.Classes.Funcionario;
@@ -24,17 +23,21 @@ public class FuncionarioService {
         funcionarioRepository.save(funcionario);
     }
 
-    public void adicionarProduto() {
+    public void cadastrarProduto(Produto produto) {
+        produtoRepositorio.save(produto);
     }
 
-    public void removerProduto() {
+    public void deletarProduto(Integer id) {
+        produtoRepositorio.deleteById(id);
     }
 
-    public void ativarProduto(Produto produto) {
+    public void ativarProduto(Integer produtoId) {
+        Produto produto = produtoRepositorio.findById(produtoId).orElseThrow(null);
         produto.ativar();
     }
 
-    public void desativarProduto(Produto produto) {
+    public void inativarProduto(Integer produtoId) {
+        Produto produto = produtoRepositorio.findById(produtoId).orElseThrow(null);
         produto.desativar();
     }
 

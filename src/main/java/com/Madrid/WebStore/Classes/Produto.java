@@ -2,6 +2,8 @@ package com.Madrid.WebStore.Classes;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Produto {
 
@@ -25,13 +27,12 @@ public class Produto {
 
     public String categoria;
 
-    public boolean ativo;
+    public boolean estoque;
 
-    @JoinColumn(name = "cliente_id")
-    @ManyToOne
-    private Cliente cliente;
+    @ManyToMany(mappedBy = "produto")
+    private List<Cliente> cliente;
 
-    public Produto(String nomeProduto, String cor, String tamanho, String marca, String medidas, String tipo, Double valor, String categoria, boolean ativo) {
+    public Produto(String nomeProduto, String cor, String tamanho, String marca, String medidas, String tipo, Double valor, String categoria, boolean estoque) {
         this.nomeProduto = nomeProduto;
         this.cor = cor;
         this.tamanho = tamanho;
@@ -40,7 +41,7 @@ public class Produto {
         this.tipo = tipo;
         this.valor = valor;
         this.categoria = categoria;
-        this.ativo = false;
+        this.estoque = false;
     }
 
     public Produto() {
@@ -118,20 +119,20 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    public boolean isAtivo() {
-        return ativo;
+    public boolean isEstoque() {
+        return estoque;
     }
 
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
+    public void setEstoque(boolean estoque) {
+        this.estoque = estoque;
     }
 
     public void ativar() {
-        this.ativo = true;
+        this.estoque = true;
     }
 
     public void desativar() {
-        this.ativo = false;
+        this.estoque = false;
     }
 
 }

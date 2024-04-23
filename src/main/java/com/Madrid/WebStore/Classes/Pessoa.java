@@ -2,12 +2,9 @@ package com.Madrid.WebStore.Classes;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
-
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@Entity
-public class Pessoa {
-
+@MappedSuperclass
+public abstract class Pessoa {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
@@ -15,7 +12,7 @@ public class Pessoa {
 
     private String nome;
 
-    private Date dataNascimento;
+    private String dataNascimento;
 
     private String endereco;
 
@@ -26,7 +23,7 @@ public class Pessoa {
     public Pessoa() {
     }
 
-    public Pessoa(String nome, Date dataNascimento, String endereco, String telefone, String cpf) {
+    public Pessoa(String nome, String dataNascimento, String endereco, String telefone, String cpf) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.endereco = endereco;
@@ -50,11 +47,11 @@ public class Pessoa {
         this.nome = nome;
     }
 
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

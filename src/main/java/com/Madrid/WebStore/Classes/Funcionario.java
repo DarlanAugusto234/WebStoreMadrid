@@ -19,7 +19,7 @@ public class Funcionario extends Pessoa {
     }
 
     // Construtor com todos os atributos
-    public Funcionario(String nome, Date dataNascimento, String endereco, String telefone, String cpf, String emailFuncionario, String senhaFuncionario) {
+    public Funcionario(String nome, String dataNascimento, String endereco, String telefone, String cpf, String emailFuncionario, String senhaFuncionario) {
         super(nome, dataNascimento, endereco, telefone, cpf);
         this.emailFuncionario = emailFuncionario;
         this.senhaFuncionario = senhaFuncionario;

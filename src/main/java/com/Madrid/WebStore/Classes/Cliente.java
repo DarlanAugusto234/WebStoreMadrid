@@ -12,13 +12,15 @@ public class Cliente extends Pessoa {
 
     private String senha_cliente;
 
-    @OneToMany(mappedBy = "cliente")
+    @ManyToMany
+    @JoinTable(name = "compra", joinColumns = @JoinColumn(name = "cliente_id"),
+            inverseJoinColumns = @JoinColumn(name = "produto_id"))
     private List<Produto> produto;
 
     public Cliente() {
     }
 
-    public Cliente(String nome, Date dataNascimento, String endereco, String telefone, String cpf, String email_cliente, String senha_cliente) {
+    public Cliente(String nome, String dataNascimento, String endereco, String telefone, String cpf, String email_cliente, String senha_cliente) {
         super(nome, dataNascimento, endereco, telefone, cpf);
         this.email_cliente = email_cliente;
         this.senha_cliente = senha_cliente;
