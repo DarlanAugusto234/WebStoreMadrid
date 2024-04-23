@@ -1,7 +1,7 @@
+// Produto.java
 package com.Madrid.WebStore.Classes;
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
@@ -41,7 +41,7 @@ public class Produto {
         this.tipo = tipo;
         this.valor = valor;
         this.categoria = categoria;
-        this.estoque = false;
+        this.estoque = estoque;
     }
 
     public Produto() {
@@ -134,5 +134,4 @@ public class Produto {
     public void desativar() {
         this.estoque = false;
     }
-
 }

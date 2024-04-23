@@ -32,13 +32,17 @@ public class FuncionarioService {
     }
 
     public void ativarProduto(Integer produtoId) {
-        Produto produto = produtoRepositorio.findById(produtoId).orElseThrow(null);
-        produto.ativar();
+        Produto produto = produtoRepositorio.findById(produtoId).orElseThrow(()
+                -> new RuntimeException("Produto não encontrado com o ID: " + produtoId));
+        produto.ativar(); // Chama o método ativar da classe Produto
+        produtoRepositorio.save(produto);
     }
 
     public void inativarProduto(Integer produtoId) {
-        Produto produto = produtoRepositorio.findById(produtoId).orElseThrow(null);
-        produto.desativar();
+        Produto produto = produtoRepositorio.findById(produtoId).orElseThrow(()
+                -> new RuntimeException("Produto não encontrado com o ID: " + produtoId));
+        produto.desativar(); // Chama o método desativar da classe Produto
+        produtoRepositorio.save(produto);
     }
 
 }

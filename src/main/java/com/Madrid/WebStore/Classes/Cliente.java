@@ -13,9 +13,13 @@ public class Cliente extends Pessoa {
     private String senha_cliente;
 
     @ManyToMany
-    @JoinTable(name = "compra", joinColumns = @JoinColumn(name = "cliente_id"),
-            inverseJoinColumns = @JoinColumn(name = "produto_id"))
+    @JoinTable(
+            name = "Carrinho",
+            joinColumns = @JoinColumn(name = "cliente_id"),
+            inverseJoinColumns = @JoinColumn(name = "produto_id")
+    )
     private List<Produto> produto;
+
 
     public Cliente() {
     }

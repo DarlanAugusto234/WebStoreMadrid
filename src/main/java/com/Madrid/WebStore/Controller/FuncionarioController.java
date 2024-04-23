@@ -33,14 +33,14 @@ public class FuncionarioController {
         funcionarioService.deletarProduto(id);
     }
 
-    // Ativar Produto pelo Id
-    @PutMapping("/produto/{id}/ativar")
+    //
+    @PutMapping("/ativar/{id}")
     public void ativarProduto(@PathVariable Integer id) {
         funcionarioService.ativarProduto(id);
     }
 
-    // Inativar Produto pelo Id
-    @PutMapping("/produto/{id}/inativar")
+    //
+    @PutMapping("/inativar/{id}")
     public void inativarProduto(@PathVariable Integer id) {
         funcionarioService.inativarProduto(id);
     }
