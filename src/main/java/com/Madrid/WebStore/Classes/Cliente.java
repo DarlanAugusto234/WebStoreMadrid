@@ -2,15 +2,16 @@ package com.Madrid.WebStore.Classes;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 public class Cliente extends Pessoa {
 
-    private String email_cliente;
+    private String emailCliente;
 
-    private String senha_cliente;
+    private String senhaCliente;
 
     @ManyToMany
     @JoinTable(
@@ -24,26 +25,26 @@ public class Cliente extends Pessoa {
     public Cliente() {
     }
 
-    public Cliente(String nome, String dataNascimento, String endereco, String telefone, String cpf, String email_cliente, String senha_cliente) {
+    public Cliente(String nome, LocalDate dataNascimento, String endereco, String telefone, String cpf, String email_cliente, String senha_cliente) {
         super(nome, dataNascimento, endereco, telefone, cpf);
-        this.email_cliente = email_cliente;
-        this.senha_cliente = senha_cliente;
+        this.emailCliente = email_cliente;
+        this.senhaCliente = senha_cliente;
     }
 
     public String getEmail_cliente() {
-        return email_cliente;
+        return emailCliente;
     }
 
     public void setEmail_cliente(String email_cliente) {
-        this.email_cliente = email_cliente;
+        this.emailCliente = email_cliente;
     }
 
     public String getSenha_cliente() {
-        return senha_cliente;
+        return senhaCliente;
     }
 
     public void setSenha_cliente(String senha_cliente) {
-        this.senha_cliente = senha_cliente;
+        this.senhaCliente = senha_cliente;
     }
 
     public List<Produto> getProduto() {

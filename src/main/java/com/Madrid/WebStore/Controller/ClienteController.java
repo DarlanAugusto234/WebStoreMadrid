@@ -23,11 +23,14 @@ public class ClienteController {
         clienteService.cadastrarCliente(cliente);
     }
 
-    // Buscar Cliente pelo Id (Metódo criado para ver o Cliente) (Funcionando)
+
+    // Buscar Cliente pelo (Metódo criado para ver o Cliente) (Funcionando)
+    // Filtrar pelo Id e Filtrar pelo Nome
     @GetMapping("/buscarCliente")
     public List<Cliente> buscarCliente() {
         return clienteService.listarCliente();
     }
+
 
     // Deletar Cliente ou Excluir Conta (Funcionando)
     @DeleteMapping("/deletarCliente/{id}")
@@ -41,11 +44,13 @@ public class ClienteController {
         return clienteService.listarProdutos();
     }
 
+
     // Buscar Produto pela Categoria
     @GetMapping("/produtosPorCategoria/{categoria}")
     public List<Produto> procurarProdutosPorCategoria(@PathVariable String categoria) {
         return clienteService.procurarProdutoPorCategoria(categoria);
     }
+
 
     // Adicionando um Produto ao Carrinho do Cliente Pelo Id
     @PostMapping("/adicionarProdutoAoCarrinho/{clienteId}/{produtoId}")

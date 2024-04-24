@@ -1,6 +1,9 @@
 package com.Madrid.WebStore.Classes;
 
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalDate;
 
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @MappedSuperclass
@@ -12,7 +15,7 @@ public abstract class Pessoa {
 
     private String nome;
 
-    private String dataNascimento;
+    private LocalDate dataNascimento;
 
     private String endereco;
 
@@ -23,7 +26,7 @@ public abstract class Pessoa {
     public Pessoa() {
     }
 
-    public Pessoa(String nome, String dataNascimento, String endereco, String telefone, String cpf) {
+    public Pessoa(String nome, LocalDate dataNascimento, String endereco, String telefone, String cpf) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.endereco = endereco;
@@ -47,11 +50,11 @@ public abstract class Pessoa {
         this.nome = nome;
     }
 
-    public String getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

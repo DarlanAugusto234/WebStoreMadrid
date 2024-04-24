@@ -53,9 +53,13 @@ public class ClienteService {
     public void adicionarProdutoAoCarrinho(Integer clienteId, Integer produtoId) {
         Cliente cliente = clienteRepository.findById(clienteId).orElseThrow(null);
         Produto produto = produtoRepositorio.findById(produtoId).orElseThrow(null);
-        List<Produto> carrinho = cliente.getProduto();
-        carrinho.add(produto);
-        clienteRepository.save(cliente);
+
+        // Verifica se o produto está disponível para venda antes de adicionar ao carrinho
+        if (produto.disponivelParaVenda()) {
+            List<Produto> carrinho = cliente.getProduto();
+            carrinho.add(produto);
+            clienteRepository.save(cliente);
+        }
     }
 
 

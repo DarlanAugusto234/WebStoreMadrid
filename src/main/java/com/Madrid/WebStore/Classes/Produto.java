@@ -123,6 +123,11 @@ public class Produto {
         return estoque;
     }
 
+    // Adicionando um método para verificar se o produto está disponível para venda
+    public boolean disponivelParaVenda() {
+        return estoque; // Retorna true se o produto estiver em estoque
+    }
+
     public void setEstoque(boolean estoque) {
         this.estoque = estoque;
     }
