@@ -4,6 +4,11 @@ import org.springframework.stereotype.Repository;
 
 import com.Madrid.WebStore.Classes.Funcionario;
 
+import java.util.List;
+
 @Repository
-public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer> {
+public interface FuncionarioRepositorio extends JpaRepository<Funcionario, Integer> {
+
+    List<Funcionario> findByNome(String nome);
+
 }

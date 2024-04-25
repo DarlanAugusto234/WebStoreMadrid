@@ -1,10 +1,11 @@
 package com.Madrid.WebStore.Controller;
 
 import com.Madrid.WebStore.Classes.Funcionario;
-import com.Madrid.WebStore.Classes.Produto;
 import com.Madrid.WebStore.Service.FuncionarioService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class FuncionarioController {
@@ -15,34 +16,28 @@ public class FuncionarioController {
         this.funcionarioService = funcionarioService;
     }
 
-    // Cadastrar Funcionario
+    // Cadastrar e Atualizar Funcionarios
     @PostMapping("/cadastrarFuncionario")
     public void cadastroFuncionario(@Valid @RequestBody Funcionario funcionario) {
-        funcionarioService.cadastroAdministrador(funcionario);
+        funcionarioService.cadastrarFuncionario(funcionario);
     }
 
-    // Cadastrar Produto
-    @PostMapping("/cadastrarProduto")
-    public void cadastroProduto(@Valid @RequestBody Produto produto) {
-        funcionarioService.cadastrarProduto(produto);
+    // Listar todos os Funcionarios
+    @GetMapping("/listarTodosOsFuncionarios")
+    public List<Funcionario> listarTodosFuncionarios() {
+        return funcionarioService.listarTodosFuncionarios();
     }
 
-    // Deletar Produto pelo Id
-    @DeleteMapping("/deletarProduto/{id}")
-    public void deletarProduto(@PathVariable Integer id) {
-        funcionarioService.deletarProduto(id);
+    // Procurar Funcionario pelo Nome
+    @GetMapping("/procurarFuncionarioPeloNome/{nome}")
+    public List<Funcionario> getFuncionarioByNome(@PathVariable String nome) {
+        return funcionarioService.procurarFuncionarioPorNome(nome);
     }
 
-    //
-    @PutMapping("/ativar/{id}")
-    public void ativarProduto(@PathVariable Integer id) {
-        funcionarioService.ativarProduto(id);
-    }
-
-    //
-    @PutMapping("/inativar/{id}")
-    public void inativarProduto(@PathVariable Integer id) {
-        funcionarioService.inativarProduto(id);
+    // Procurar Funcionario Pelo Id
+    @GetMapping("/procurarFuncionarioPeloId/{id}")
+    public Funcionario getFuncionarioById(@PathVariable Integer id) {
+        return funcionarioService.procurarFuncionarioPorId(id);
     }
 
 }

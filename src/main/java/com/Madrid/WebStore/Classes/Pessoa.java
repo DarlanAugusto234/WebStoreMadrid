@@ -1,6 +1,7 @@
 package com.Madrid.WebStore.Classes;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
@@ -13,14 +14,19 @@ public abstract class Pessoa {
     @Id
     private Integer id;
 
+    @NotBlank
     private String nome;
 
+    @NotBlank
     private LocalDate dataNascimento;
 
+    @NotBlank
     private String endereco;
 
+    @NotBlank
     private String telefone;
 
+    @NotBlank
     private String cpf;
 
     public Pessoa() {

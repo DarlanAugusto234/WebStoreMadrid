@@ -1,6 +1,7 @@
 package com.Madrid.WebStore.Classes;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -9,13 +10,14 @@ import java.util.List;
 @Entity
 public class Cliente extends Pessoa {
 
+    @NotBlank
     private String emailCliente;
 
+    @NotBlank
     private String senhaCliente;
 
     @ManyToMany
-    @JoinTable(
-            name = "Carrinho",
+    @JoinTable(name = "Carrinho",
             joinColumns = @JoinColumn(name = "cliente_id"),
             inverseJoinColumns = @JoinColumn(name = "produto_id")
     )

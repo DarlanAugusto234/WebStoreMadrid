@@ -2,65 +2,60 @@ package com.Madrid.WebStore.Service;
 
 import com.Madrid.WebStore.Classes.Cliente;
 import com.Madrid.WebStore.Classes.Produto;
-import com.Madrid.WebStore.Repositorios.ClienteRepository;
+import com.Madrid.WebStore.Repositorios.ClienteRepositorio;
 import com.Madrid.WebStore.Repositorios.ProdutoRepositorio;
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ClienteService {
 
-    ClienteRepository clienteRepository;
+    ClienteRepositorio clienteRepositorio;
 
     ProdutoRepositorio produtoRepositorio;
 
-    public ClienteService(ClienteRepository clienteRepository, ProdutoRepositorio produtoRepositorio) {
-        this.clienteRepository = clienteRepository;
+    public ClienteService(ClienteRepositorio clienteRepositorio, ProdutoRepositorio produtoRepositorio) {
+        this.clienteRepositorio = clienteRepositorio;
         this.produtoRepositorio = produtoRepositorio;
     }
 
-    // Cadastrar Cliente
+    // Cadastrar e Atualizar Clientes
     public void cadastrarCliente(Cliente cliente) {
-        clienteRepository.save(cliente);
+        clienteRepositorio.save(cliente);
     }
 
-    // Listar Clientes (testes)
+    // Listar Clientes
     public List<Cliente> listarCliente(){
-        return clienteRepository.findAll();
+        return clienteRepositorio.findAll();
     }
 
     // Deletar Cliente pelo Id
     public void deletarCliente(Integer id){
-        clienteRepository.deleteById(id);
+        clienteRepositorio.deleteById(id);
     }
 
-    // Metódo para Buscar todos os Produtos Criados
-    public List<Produto> listarProdutos(){
-        return produtoRepositorio.findAll();
+    // Procurar Cliente por ID
+    public Cliente procurarClientePorId(Integer clienteId) {
+        return clienteRepositorio.findById(clienteId).orElse(null);
     }
 
-    // Procurar Produto pela Categoria
-    public List<Produto> procurarProdutoPorCategoria(String categoria) {
-        return produtoRepositorio.findByCategoria(categoria);
+    // Procurar Cliente por Nome
+    public List<Cliente> procurarClientePorNome(String nome) {
+        return clienteRepositorio.findByNome(nome);
     }
 
     // Adicionar um Produto ao Carrinho do Cliente
     public void adicionarProdutoAoCarrinho(Integer clienteId, Integer produtoId) {
-        Cliente cliente = clienteRepository.findById(clienteId).orElseThrow(null);
-        Produto produto = produtoRepositorio.findById(produtoId).orElseThrow(null);
+        Cliente cliente = clienteRepositorio.findById(clienteId).orElseThrow();
+        Produto produto = produtoRepositorio.findById(produtoId).orElseThrow();
 
         // Verifica se o produto está disponível para venda antes de adicionar ao carrinho
         if (produto.disponivelParaVenda()) {
             List<Produto> carrinho = cliente.getProduto();
             carrinho.add(produto);
-            clienteRepository.save(cliente);
+            clienteRepositorio.save(cliente);
         }
     }
-
 
 }

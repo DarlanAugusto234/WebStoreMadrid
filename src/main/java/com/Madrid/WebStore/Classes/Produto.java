@@ -2,6 +2,8 @@
 package com.Madrid.WebStore.Classes;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.List;
 
 @Entity
@@ -11,20 +13,27 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
+    @NotBlank
     public String nomeProduto;
 
+    @NotBlank
     public String cor;
 
+    @NotBlank
     public String tamanho;
 
+    @NotBlank
     public String marca;
 
     public String medidas;
 
+    @NotBlank
     public String tipo;
 
+    @NotBlank
     public Double valor;
 
+    @NotBlank
     public String categoria;
 
     public boolean estoque;
@@ -41,7 +50,7 @@ public class Produto {
         this.tipo = tipo;
         this.valor = valor;
         this.categoria = categoria;
-        this.estoque = estoque;
+        this.estoque = true;
     }
 
     public Produto() {

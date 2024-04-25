@@ -17,38 +17,34 @@ public class ClienteController {
         this.clienteService = clienteService;
     }
 
-    // Cadastro e Atualização do Cliente (Funcionando)
+    // Cadastro e Atualização do Cliente
     @PostMapping("/cadastrarCliente")
     public void cadastrarCliente(@Valid @RequestBody Cliente cliente) {
         clienteService.cadastrarCliente(cliente);
     }
 
-
-    // Buscar Cliente pelo (Metódo criado para ver o Cliente) (Funcionando)
-    // Filtrar pelo Id e Filtrar pelo Nome
-    @GetMapping("/buscarCliente")
+    // Listar Todos os Clientes
+    @GetMapping("/listarTodosOsClientes")
     public List<Cliente> buscarCliente() {
         return clienteService.listarCliente();
     }
 
+    // Procurar Pelo Id do Cliente
+    @GetMapping("/procurarClientePeloId/{clienteId}")
+    public Cliente getClienteById(@PathVariable Integer clienteId) {
+        return clienteService.procurarClientePorId(clienteId);
+    }
 
-    // Deletar Cliente ou Excluir Conta (Funcionando)
+    // Procurar Cliente pelo Nome
+    @GetMapping("/procurarClientePeloNome/{nome}")
+    public List<Cliente> getClienteByNome(@PathVariable String nome) {
+        return clienteService.procurarClientePorNome(nome);
+    }
+
+    // Deletar Cliente ou Excluir Conta
     @DeleteMapping("/deletarCliente/{id}")
     public void deletarCliente(@PathVariable Integer id) {
         clienteService.deletarCliente(id);
-    }
-
-    // Buscar Produtos
-    @GetMapping("/listarProdutos")
-    public List<Produto> listarProdutos() {
-        return clienteService.listarProdutos();
-    }
-
-
-    // Buscar Produto pela Categoria
-    @GetMapping("/produtosPorCategoria/{categoria}")
-    public List<Produto> procurarProdutosPorCategoria(@PathVariable String categoria) {
-        return clienteService.procurarProdutoPorCategoria(categoria);
     }
 
 
