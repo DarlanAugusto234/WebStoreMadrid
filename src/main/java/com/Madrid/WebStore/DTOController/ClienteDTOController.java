@@ -1,8 +1,7 @@
-package com.Madrid.WebStore.Controller;
+package com.Madrid.WebStore.DTOController;
 
 import com.Madrid.WebStore.DTO.ClienteDTO;
-import com.Madrid.WebStore.Service.ClienteDTOService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.Madrid.WebStore.DTOService.ClienteDTOService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;

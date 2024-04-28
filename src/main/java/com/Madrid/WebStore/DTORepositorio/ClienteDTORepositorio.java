@@ -1,4 +1,4 @@
-package com.Madrid.WebStore.Repositorios;
+package com.Madrid.WebStore.DTORepositorio;
 
 import org.springframework.stereotype.Repository;
 

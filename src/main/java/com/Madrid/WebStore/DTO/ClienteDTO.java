@@ -1,28 +1,18 @@
 package com.Madrid.WebStore.DTO;
 
+import com.Madrid.WebStore.Classes.Cliente;
 import jakarta.validation.constraints.NotBlank;
 
 public class ClienteDTO {
 
-    @NotBlank
     private String nome;
 
-    @NotBlank
     private String endereco;
 
-    @NotBlank
     private String telefone;
 
-    @NotBlank
     private String cpf;
 
-    @NotBlank
-    private String emailCliente;
-
-    @NotBlank
-    private String senhaCliente;
-
-    // Getters e setters
     public String getNome() {
         return nome;
     }
@@ -53,21 +43,5 @@ public class ClienteDTO {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public String getEmailCliente() {
-        return emailCliente;
-    }
-
-    public void setEmailCliente(String emailCliente) {
-        this.emailCliente = emailCliente;
-    }
-
-    public String getSenhaCliente() {
-        return senhaCliente;
-    }
-
-    public void setSenhaCliente(String senhaCliente) {
-        this.senhaCliente = senhaCliente;
     }
 }

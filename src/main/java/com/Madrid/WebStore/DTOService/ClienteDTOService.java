@@ -1,7 +1,8 @@
-package com.Madrid.WebStore.Service;
+package com.Madrid.WebStore.DTOService;
 
 import com.Madrid.WebStore.Classes.Cliente;
 import com.Madrid.WebStore.DTO.ClienteDTO;
+import com.Madrid.WebStore.Service.ClienteService;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,8 +27,6 @@ public class ClienteDTOService {
         clienteDTO.setEndereco(cliente.getEndereco());
         clienteDTO.setTelefone(cliente.getTelefone());
         clienteDTO.setCpf(cliente.getCpf());
-        clienteDTO.setEmailCliente(cliente.getEmail_cliente());
-        clienteDTO.setSenhaCliente(cliente.getSenha_cliente());
         return clienteDTO;
     }
 
