@@ -3,6 +3,9 @@ package com.Madrid.WebStore.DTO;
 import com.Madrid.WebStore.Classes.Cliente;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ClienteDTO {
 
     private String nome;
@@ -44,4 +47,16 @@ public class ClienteDTO {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
+    // Método auxiliar para converter um Cliente em um ClienteDTO
+    private ClienteDTO convertToDTO(Cliente cliente) {
+        ClienteDTO clienteDTO = new ClienteDTO();
+        clienteDTO.setNome(cliente.getNome());
+        clienteDTO.setEndereco(cliente.getEndereco());
+        clienteDTO.setTelefone(cliente.getTelefone());
+        clienteDTO.setCpf(cliente.getCpf());
+        return clienteDTO;
+    }
+
 }
+
