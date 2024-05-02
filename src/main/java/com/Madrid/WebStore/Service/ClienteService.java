@@ -37,7 +37,7 @@ public class ClienteService {
 
     // Procurar Cliente por ID
     public Cliente procurarClientePorId(Integer clienteId) {
-        return clienteRepositorio.findById(clienteId).orElse(null);
+        return clienteRepositorio.findById(clienteId).get();
     }
 
     // Procurar Cliente por Nome
@@ -47,8 +47,8 @@ public class ClienteService {
 
     // Adicionar um Produto ao Carrinho do Cliente
     public void adicionarProdutoAoCarrinho(Integer clienteId, Integer produtoId) {
-        Cliente cliente = clienteRepositorio.findById(clienteId).orElseThrow();
-        Produto produto = produtoRepositorio.findById(produtoId).orElseThrow();
+        Cliente cliente = clienteRepositorio.findById(clienteId).get();
+        Produto produto = produtoRepositorio.findById(produtoId).get();
 
         // Verifica se o produto está disponível para venda antes de adicionar ao carrinho
         if (produto.disponivelParaVenda()) {

@@ -2,6 +2,7 @@ package com.Madrid.WebStore.Controller;
 
 import com.Madrid.WebStore.Classes.Cliente;
 import com.Madrid.WebStore.Classes.Produto;
+import com.Madrid.WebStore.DTO.ClienteDTO;
 import com.Madrid.WebStore.Service.ClienteService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -17,16 +18,17 @@ public class ClienteController {
         this.clienteService = clienteService;
     }
 
-    // Cadastro e Atualização do Cliente
+    // Metodo para Cadastrar ou Atualizar Cliente
     @PostMapping("/cadastrarCliente")
     public void cadastrarCliente(@Valid @RequestBody Cliente cliente) {
         clienteService.cadastrarCliente(cliente);
     }
 
-    // Listar Todos os Clientes
+    // Listar Todos os ClientesDTO
     @GetMapping("/listarTodosOsClientes")
-    public List<Cliente> buscarCliente() {
-        return clienteService.listarCliente();
+    public List<ClienteDTO> buscarCliente() {
+        List<Cliente> cliente = clienteService.listarCliente();
+        return ClienteDTO.convert(cliente);
     }
 
     // Procurar Pelo Id do Cliente

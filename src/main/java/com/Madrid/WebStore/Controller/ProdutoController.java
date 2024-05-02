@@ -28,8 +28,14 @@ public class ProdutoController {
         produtoService.deletarProduto(id);
     }
 
+    // Listar Todos os Produtos
+    @GetMapping("/listarProdutos")
+    public List<Produto> listarProdutos() {
+        return produtoService.listarProdutos();
+    }
+
     // Procurar pela Categoria
-    @GetMapping("/procurarProdutoPelaCategoria{categoria}")
+    @GetMapping("/procurarProdutoPelaCategoria/{categoria}")
     public List<Produto> getProdutoByCategoria(@PathVariable String categoria) {
         return produtoService.procurarProdutoPorCategoria(categoria);
     }
