@@ -1,68 +1,63 @@
-// Produto.java
-package com.Madrid.WebStore.Classes;
+package com.Madrid.WebStore.DTO;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import com.Madrid.WebStore.Classes.Produto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Entity
-public class Produto {
+public class ProdutoDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-
-    @NotBlank
     public String nomeProduto;
-
-    @NotBlank
     public String cor;
-
-    @NotBlank
     public String tamanho;
-
-    @NotBlank
     public String marca;
-
-    public String medidas;
-
-    @NotBlank
     public String tipo;
-
-    @NotNull
     public Double valor;
-
-    @NotBlank
     public String categoria;
-
     public boolean estoque;
 
-    @ManyToMany(mappedBy = "produto")
-    private List<Cliente> cliente;
+    public ProdutoDTO() {
+    }
 
-    public Produto(String nomeProduto, String cor, String tamanho, String marca, String medidas, String tipo, Double valor, String categoria, boolean estoque) {
+    // FALTANDO COMENTARIO
+    public ProdutoDTO(String nomeProduto, String cor, String tamanho, String marca, String tipo, Double valor, String categoria, boolean estoque) {
         this.nomeProduto = nomeProduto;
         this.cor = cor;
         this.tamanho = tamanho;
         this.marca = marca;
-        this.medidas = medidas;
         this.tipo = tipo;
         this.valor = valor;
         this.categoria = categoria;
         this.estoque = estoque;
     }
 
-    public Produto() {
+    // FALTANDO COMENTARIO
+    public ProdutoDTO(ProdutoDTO produtoDTO) {
+        this.nomeProduto = produtoDTO.nomeProduto;
+        this.cor = produtoDTO.cor;
+        this.tamanho = produtoDTO.tamanho;
+        this.marca = produtoDTO.marca;
+        this.tipo = produtoDTO.tipo;
+        this.valor = produtoDTO.valor;
+        this.categoria = produtoDTO.categoria;
+        this.estoque = produtoDTO.estoque;
     }
 
-    public Integer getId() {
-        return id;
+    // FALTANDO COMENTARIO
+    public ProdutoDTO(Produto produto) {
+        this.nomeProduto = produto.getNomeProduto();
+        this.cor = produto.getCor();
+        this.tamanho = produto.getTamanho();
+        this.marca = produto.getMarca();
+        this.tipo = produto.getTipo();
+        this.valor = produto.getValor();
+        this.categoria = produto.getCategoria();
+        this.estoque = produto.isEstoque();
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    // FALTANDO COMENTARIO
+    public static List<ProdutoDTO> convert(List<ProdutoDTO> produtos) {
+        return produtos.stream().map(ProdutoDTO::new).collect(Collectors.toList());
     }
 
     public String getNomeProduto() {
@@ -97,14 +92,6 @@ public class Produto {
         this.marca = marca;
     }
 
-    public String getMedidas() {
-        return medidas;
-    }
-
-    public void setMedidas(String medidas) {
-        this.medidas = medidas;
-    }
-
     public String getTipo() {
         return tipo;
     }
@@ -130,24 +117,11 @@ public class Produto {
     }
 
     public boolean isEstoque() {
-        return estoque = estoque;
-    }
-
-    // Adicionando um método para verificar se o produto está disponível para venda
-    public boolean disponivelParaVenda() {
-        return estoque; // Retorna true se o produto estiver em estoque
+        return estoque;
     }
 
     public void setEstoque(boolean estoque) {
         this.estoque = estoque;
-    }
-
-    public void ativar() {
-        this.estoque = true;
-    }
-
-    public void desativar() {
-        this.estoque = false;
     }
 
 }

@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -16,7 +15,9 @@ public class Cliente extends Pessoa {
     @NotBlank
     private String senhaCliente;
 
+
     @ManyToMany
+    // FALTANDO COMENTARIO O JOINTABLE
     @JoinTable(name = "Carrinho",
             joinColumns = @JoinColumn(name = "cliente_id"),
             inverseJoinColumns = @JoinColumn(name = "produto_id")
@@ -27,26 +28,26 @@ public class Cliente extends Pessoa {
     public Cliente() {
     }
 
-    public Cliente(String nome, LocalDate dataNascimento, String endereco, String telefone, String cpf, String email_cliente, String senha_cliente) {
+    public Cliente(String nome, LocalDate dataNascimento, String endereco, String telefone, String cpf, String emailCliente, String senhaCliente) {
         super(nome, dataNascimento, endereco, telefone, cpf);
-        this.emailCliente = email_cliente;
-        this.senhaCliente = senha_cliente;
+        this.emailCliente = emailCliente;
+        this.senhaCliente = senhaCliente;
     }
 
-    public String getEmail_cliente() {
+    public String getEmailCliente() {
         return emailCliente;
     }
 
-    public void setEmail_cliente(String email_cliente) {
-        this.emailCliente = email_cliente;
+    public void setEmailCliente(String emailCliente) {
+        this.emailCliente = emailCliente;
     }
 
-    public String getSenha_cliente() {
+    public String getSenhaCliente() {
         return senhaCliente;
     }
 
-    public void setSenha_cliente(String senha_cliente) {
-        this.senhaCliente = senha_cliente;
+    public void setSenhaCliente(String senhaCliente) {
+        this.senhaCliente = senhaCliente;
     }
 
     public List<Produto> getProduto() {
