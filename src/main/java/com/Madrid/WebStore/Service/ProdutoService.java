@@ -27,7 +27,7 @@ public class ProdutoService {
     }
 
     // Listar Todos os Produtos
-    public List<Produto> listarProdutos(){
+    public List<Produto> listarProdutos() {
         return produtoRepositorio.findAll();
     }
 
@@ -64,25 +64,30 @@ public class ProdutoService {
         // Remover o produto do carrinho de todos os clientes que o possuem
         List<Cliente> clientes = clienteRepositorio.findByProdutoId(produtoId);
 
-        // FALTANDO COMENTARIO daqui pra BAIXO
+        // Itera sobre a lista de clientes para encontrar o cliente atual
         for (Cliente cliente : clientes) {
 
+            // Obtém o carrinho de compras do cliente atual
             List<Produto> carrinho = cliente.getProduto();
+
+            // Cria um iterador para percorrer o carrinho de compras
             Iterator<Produto> iterator = carrinho.iterator();
 
+            // Itera sobre os produtos no carrinho
             while (iterator.hasNext()) {
 
+                // Obtém o próximo produto no carrinho
                 Produto produtoNoCarrinho = iterator.next();
 
+                // Verifica se o ID do produto no carrinho corresponde ao ID do produto que
+                // estamos procurando
                 if (produtoNoCarrinho.getId().equals(produtoId)) {
                     iterator.remove(); // Remove o produto do carrinho
                 }
-
             }
-
-            clienteRepositorio.save(cliente); // Salva as alterações no cliente
-
         }
+
+        clienteRepositorio.save(cliente); // Salva as alterações no cliente
 
     }
 
