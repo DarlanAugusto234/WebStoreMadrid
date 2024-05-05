@@ -19,8 +19,10 @@ public class ProdutoDTO {
     public ProdutoDTO() {
     }
 
-    // FALTANDO COMENTARIO
-    public ProdutoDTO(String nomeProduto, String cor, String tamanho, String marca, String tipo, Double valor, String categoria, boolean estoque) {
+    // Construtor para inicializar os atributos do ProdutoDTO com os valores
+    // especificados
+    public ProdutoDTO(String nomeProduto, String cor, String tamanho, String marca, String tipo, Double valor,
+            String categoria, boolean estoque) {
         this.nomeProduto = nomeProduto;
         this.cor = cor;
         this.tamanho = tamanho;
@@ -31,7 +33,8 @@ public class ProdutoDTO {
         this.estoque = estoque;
     }
 
-    // FALTANDO COMENTARIO
+    // Construtor de cópia para criar um novo ProdutoDTO a partir de outro
+    // ProdutoDTO fornecido
     public ProdutoDTO(ProdutoDTO produtoDTO) {
         this.nomeProduto = produtoDTO.nomeProduto;
         this.cor = produtoDTO.cor;
@@ -43,7 +46,8 @@ public class ProdutoDTO {
         this.estoque = produtoDTO.estoque;
     }
 
-    // FALTANDO COMENTARIO
+    // Construtor da classe ProdutoDTO que inicializa seus atributos com os valores
+    // correspondentes do objeto Produto fornecido
     public ProdutoDTO(Produto produto) {
         this.nomeProduto = produto.getNomeProduto();
         this.cor = produto.getCor();
@@ -55,7 +59,8 @@ public class ProdutoDTO {
         this.estoque = produto.isEstoque();
     }
 
-    // FALTANDO COMENTARIO
+    // Método estático para converter uma lista de objetos ProdutoDTO em uma nova
+    // lista de ProdutoDTOs
     public static List<ProdutoDTO> convert(List<ProdutoDTO> produtos) {
         return produtos.stream().map(ProdutoDTO::new).collect(Collectors.toList());
     }
