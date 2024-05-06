@@ -1,5 +1,6 @@
 package com.Madrid.WebStore.DTO;
 
+import com.Madrid.WebStore.Classes.Categoria;
 import com.Madrid.WebStore.Classes.Produto;
 
 import java.util.List;
@@ -13,7 +14,8 @@ public class ProdutoDTO {
     public String marca;
     public String tipo;
     public Double valor;
-    public String categoria;
+
+    public Categoria categoria;
     public boolean estoque;
 
     public ProdutoDTO() {
@@ -21,8 +23,10 @@ public class ProdutoDTO {
 
     // Construtor para inicializar os atributos do ProdutoDTO com os valores
     // especificados
-    public ProdutoDTO(String nomeProduto, String cor, String tamanho, String marca, String tipo, Double valor,
-            String categoria, boolean estoque) {
+
+
+    public ProdutoDTO(String nomeProduto, String cor, String tamanho, String marca, String tipo,
+                      Double valor, Categoria categoria, boolean estoque) {
         this.nomeProduto = nomeProduto;
         this.cor = cor;
         this.tamanho = tamanho;
@@ -58,6 +62,7 @@ public class ProdutoDTO {
         this.categoria = produto.getCategoria();
         this.estoque = produto.isEstoque();
     }
+
 
     // Método estático para converter uma lista de objetos ProdutoDTO em uma nova
     // lista de ProdutoDTOs
@@ -113,11 +118,11 @@ public class ProdutoDTO {
         this.valor = valor;
     }
 
-    public String getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 

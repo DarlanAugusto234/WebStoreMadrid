@@ -1,6 +1,7 @@
 // Produto.java
 package com.Madrid.WebStore.Classes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -15,34 +16,38 @@ public class Produto {
     private Integer id;
 
     @NotBlank
-    public String nomeProduto;
+    private String nomeProduto;
 
     @NotBlank
-    public String cor;
+    private String cor;
 
     @NotBlank
-    public String tamanho;
+    private String tamanho;
 
     @NotBlank
-    public String marca;
+    private String marca;
 
-    public String medidas;
+    private String medidas;
 
     @NotBlank
-    public String tipo;
+    private String tipo;
 
     @NotNull
-    public Double valor;
-
-    @NotBlank
-    public String categoria;
+    private Double valor;
 
     public boolean estoque;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
     @ManyToMany(mappedBy = "produto")
+    @JsonIgnore
     private List<Cliente> cliente;
 
-    public Produto(String nomeProduto, String cor, String tamanho, String marca, String medidas, String tipo, Double valor, String categoria, boolean estoque) {
+    public Produto(Integer id, String nomeProduto, String cor, String tamanho, String marca,
+                   String medidas, String tipo, Double valor, boolean estoque, Categoria categoria) {
+        this.id = id;
         this.nomeProduto = nomeProduto;
         this.cor = cor;
         this.tamanho = tamanho;
@@ -50,8 +55,8 @@ public class Produto {
         this.medidas = medidas;
         this.tipo = tipo;
         this.valor = valor;
-        this.categoria = categoria;
         this.estoque = estoque;
+        this.categoria = categoria;
     }
 
     public Produto() {
@@ -89,6 +94,22 @@ public class Produto {
         this.tamanho = tamanho;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public List<Cliente> getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(List<Cliente> cliente) {
+        this.cliente = cliente;
+    }
+
     public String getMarca() {
         return marca;
     }
@@ -119,14 +140,6 @@ public class Produto {
 
     public void setValor(Double valor) {
         this.valor = valor;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
     }
 
     public boolean isEstoque() {
