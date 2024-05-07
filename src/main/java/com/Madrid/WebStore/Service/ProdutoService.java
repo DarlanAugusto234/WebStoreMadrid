@@ -3,10 +3,7 @@ package com.Madrid.WebStore.Service;
 import com.Madrid.WebStore.Classes.Categoria;
 import com.Madrid.WebStore.Classes.Cliente;
 import com.Madrid.WebStore.Classes.Produto;
-<<<<<<< HEAD
 import com.Madrid.WebStore.DTO.ProdutoDTO;
-=======
->>>>>>> 001401adf9a8e6441ac523a6cefa1a36752c6f41
 import com.Madrid.WebStore.Repositorios.CategoriaRepositorio;
 import com.Madrid.WebStore.Repositorios.ClienteRepositorio;
 import com.Madrid.WebStore.Repositorios.ProdutoRepositorio;
@@ -31,9 +28,8 @@ public class ProdutoService {
     }
 
     // Cadastrar Produto ou Atualizar
-<<<<<<< HEAD
-    public void cadastrarProduto(ProdutoDTO produtoDTO) {
 
+    public void cadastrarProduto(ProdutoDTO produtoDTO) {
         // Busca a categoria correspondente ao ID
         Categoria categoria = categoriaRepositorio.findById(produtoDTO.getIdCategoria()).orElseThrow();
 
@@ -44,13 +40,6 @@ public class ProdutoService {
         produto.setCategoria(categoria);
 
         // Salva o produto no banco de dados
-=======
-    public void cadastrarProduto(Produto produto, Integer idCategoria) {
-        Categoria categoria = categoriaRepositorio.findById(idCategoria)
-                .orElseThrow(() -> new IllegalArgumentException("Categoria com ID " + idCategoria + " não encontrada"));
-
-        produto.setCategoria(categoria);
->>>>>>> 001401adf9a8e6441ac523a6cefa1a36752c6f41
         produtoRepositorio.save(produto);
     }
 

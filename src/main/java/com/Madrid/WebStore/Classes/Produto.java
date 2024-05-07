@@ -1,15 +1,10 @@
-// Produto.java
 package com.Madrid.WebStore.Classes;
 
-<<<<<<< HEAD
 import com.Madrid.WebStore.DTO.ProdutoDTO;
-=======
->>>>>>> 001401adf9a8e6441ac523a6cefa1a36752c6f41
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-
 import java.util.List;
 
 @Entity
@@ -30,11 +25,6 @@ public class Produto {
 
     @NotBlank
     private String marca;
-<<<<<<< HEAD
-=======
-
-    private String medidas;
->>>>>>> 001401adf9a8e6441ac523a6cefa1a36752c6f41
 
     @NotBlank
     private String tipo;
@@ -42,22 +32,22 @@ public class Produto {
     @NotNull
     private Double valor;
 
-    public boolean estoque;
+    private boolean estoque;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    @ManyToMany(mappedBy = "produto")
+    @ManyToMany(mappedBy = "produtos")
     @JsonIgnore
-    private List<Cliente> cliente;
+    private List<Cliente> clientes;
 
+    public Produto() {
+    }
+
+    // Utilizando construtor para inicializar todos os atributos da classe
     public Produto(Integer id, String nomeProduto, String cor, String tamanho, String marca,
-<<<<<<< HEAD
                    String tipo, Double valor, boolean estoque, Categoria categoria) {
-=======
-                   String medidas, String tipo, Double valor, boolean estoque, Categoria categoria) {
->>>>>>> 001401adf9a8e6441ac523a6cefa1a36752c6f41
         this.id = id;
         this.nomeProduto = nomeProduto;
         this.cor = cor;
@@ -67,9 +57,9 @@ public class Produto {
         this.valor = valor;
         this.estoque = estoque;
         this.categoria = categoria;
-<<<<<<< HEAD
     }
 
+    // COMENTAR
     public static Produto fromDTO(ProdutoDTO produtoDTO) {
         Produto produto = new Produto();
         produto.setNomeProduto(produtoDTO.getNomeProduto());
@@ -80,15 +70,9 @@ public class Produto {
         produto.setValor(produtoDTO.getValor());
         produto.setEstoque(produtoDTO.isEstoque());
         return produto;
-=======
->>>>>>> 001401adf9a8e6441ac523a6cefa1a36752c6f41
     }
 
-    public Produto() {
-    }
-
-    public Produto(ProdutoDTO produtoDTO) {
-    }
+    // Getters e setters
 
     public Integer getId() {
         return id;
@@ -122,22 +106,6 @@ public class Produto {
         this.tamanho = tamanho;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    public List<Cliente> getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(List<Cliente> cliente) {
-        this.cliente = cliente;
-    }
-
     public String getMarca() {
         return marca;
     }
@@ -145,7 +113,6 @@ public class Produto {
     public void setMarca(String marca) {
         this.marca = marca;
     }
-
 
     public String getTipo() {
         return tipo;
@@ -164,24 +131,41 @@ public class Produto {
     }
 
     public boolean isEstoque() {
-        return estoque = estoque;
-    }
-
-    // Adicionando um método para verificar se o produto está disponível para venda
-    public boolean disponivelParaVenda() {
-        return estoque; // Retorna true se o produto estiver em estoque
+        return estoque;
     }
 
     public void setEstoque(boolean estoque) {
         this.estoque = estoque;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
+    }
+
+    // Adicionando métodos para ativar e desativar o produto
     public void ativar() {
         this.estoque = true;
     }
 
     public void desativar() {
         this.estoque = false;
+    }
+
+    // Adicionando um método para verificar se o produto está disponível para venda
+    public boolean disponivelParaVenda() {
+        return estoque; // Retorna true se o produto estiver em estoque
     }
 
 }

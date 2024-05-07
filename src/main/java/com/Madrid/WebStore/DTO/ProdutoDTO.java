@@ -1,74 +1,49 @@
 package com.Madrid.WebStore.DTO;
 
-import com.Madrid.WebStore.Classes.Categoria;
 import com.Madrid.WebStore.Classes.Produto;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProdutoDTO {
 
-<<<<<<< HEAD
     private String nomeProduto;
     private String cor;
     private String tamanho;
     private String marca;
     private String tipo;
     private Double valor;
-    private Integer idCategoria;
+    private Integer idCategoria; 
     private boolean estoque;
-=======
-    public String nomeProduto;
-    public String cor;
-    public String tamanho;
-    public String marca;
-    public String tipo;
-    public Double valor;
-
-    public Categoria categoria;
-    public boolean estoque;
->>>>>>> 001401adf9a8e6441ac523a6cefa1a36752c6f41
 
     public ProdutoDTO() {
     }
 
-<<<<<<< HEAD
-    // Construtor com todos os atributos
+    // Construtor para inicializar os atributos do ProdutoDTO com os valores especificados
     public ProdutoDTO(String nomeProduto, String cor, String tamanho, String marca, String tipo,
-                      Double valor, boolean estoque, Integer idCategoria) {
-=======
-    // Construtor para inicializar os atributos do ProdutoDTO com os valores
-    // especificados
-
-
-    public ProdutoDTO(String nomeProduto, String cor, String tamanho, String marca, String tipo,
-                      Double valor, Categoria categoria, boolean estoque) {
->>>>>>> 001401adf9a8e6441ac523a6cefa1a36752c6f41
+                      Double valor, Integer idCategoria, boolean estoque) {
         this.nomeProduto = nomeProduto;
         this.cor = cor;
         this.tamanho = tamanho;
         this.marca = marca;
         this.tipo = tipo;
         this.valor = valor;
-        this.estoque = estoque;
         this.idCategoria = idCategoria;
+        this.estoque = estoque;
     }
 
-    // Construtor de cópia para criar um novo ProdutoDTO a partir de outro
-    // ProdutoDTO fornecido
+    // Construtor de cópia para criar um novo ProdutoDTO a partir de outro ProdutoDTO fornecido
     public ProdutoDTO(ProdutoDTO produtoDTO) {
-        this.idCategoria = produtoDTO.idCategoria;
         this.nomeProduto = produtoDTO.nomeProduto;
         this.cor = produtoDTO.cor;
         this.tamanho = produtoDTO.tamanho;
         this.marca = produtoDTO.marca;
         this.tipo = produtoDTO.tipo;
         this.valor = produtoDTO.valor;
+        this.idCategoria = produtoDTO.idCategoria;
         this.estoque = produtoDTO.estoque;
     }
 
-    // Construtor da classe ProdutoDTO que inicializa seus atributos com os valores
-    // correspondentes do objeto Produto fornecido
+    // Construtor da classe ProdutoDTO que inicializa seus atributos com os valores correspondentes do objeto Produto fornecido
     public ProdutoDTO(Produto produto) {
         this.nomeProduto = produto.getNomeProduto();
         this.cor = produto.getCor();
@@ -76,22 +51,13 @@ public class ProdutoDTO {
         this.marca = produto.getMarca();
         this.tipo = produto.getTipo();
         this.valor = produto.getValor();
+        this.idCategoria = produto.getCategoria().getId(); // Obtenção do ID da categoria
         this.estoque = produto.isEstoque();
     }
 
-
-    // Método estático para converter uma lista de objetos ProdutoDTO em uma nova
-    // lista de ProdutoDTOs
-    public static List<ProdutoDTO> convert(List<ProdutoDTO> produtos) {
+    // Método estático para converter uma lista de objetos ProdutoDTO em uma nova lista de ProdutoDTOs
+    public static List<ProdutoDTO> convert(List<Produto> produtos) {
         return produtos.stream().map(ProdutoDTO::new).collect(Collectors.toList());
-    }
-
-    public Integer getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(Integer idCategoria) {
-        this.idCategoria = idCategoria;
     }
 
     public String getNomeProduto() {
@@ -142,17 +108,14 @@ public class ProdutoDTO {
         this.valor = valor;
     }
 
-<<<<<<< HEAD
-=======
-    public Categoria getCategoria() {
-        return categoria;
+    public Integer getIdCategoria() {
+        return idCategoria;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setIdCategoria(Integer idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
->>>>>>> 001401adf9a8e6441ac523a6cefa1a36752c6f41
     public boolean isEstoque() {
         return estoque;
     }
@@ -160,5 +123,4 @@ public class ProdutoDTO {
     public void setEstoque(boolean estoque) {
         this.estoque = estoque;
     }
-
 }
