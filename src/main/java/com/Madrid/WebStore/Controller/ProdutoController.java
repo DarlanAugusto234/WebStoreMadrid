@@ -2,7 +2,10 @@ package com.Madrid.WebStore.Controller;
 
 import com.Madrid.WebStore.Classes.Categoria;
 import com.Madrid.WebStore.Classes.Produto;
+<<<<<<< HEAD
 import com.Madrid.WebStore.DTO.ProdutoDTO;
+=======
+>>>>>>> 001401adf9a8e6441ac523a6cefa1a36752c6f41
 import com.Madrid.WebStore.Service.CategoriaService;
 import com.Madrid.WebStore.Service.ProdutoService;
 import jakarta.validation.Valid;
@@ -23,9 +26,15 @@ public class ProdutoController {
     }
 
     // Cadastrar Produto
+<<<<<<< HEAD
     @PostMapping("/cadastrarProduto")
     public void cadastrarProduto(@RequestBody ProdutoDTO produtoDTO) {
         produtoService.cadastrarProduto(produtoDTO);
+=======
+    @PostMapping("/cadastrarProduto/{idCategoria}")
+    public void cadastrarProduto(@RequestBody Produto produto, @PathVariable Integer idCategoria) {
+        produtoService.cadastrarProduto(produto, idCategoria);
+>>>>>>> 001401adf9a8e6441ac523a6cefa1a36752c6f41
     }
 
     // Deletar Produto pelo Id

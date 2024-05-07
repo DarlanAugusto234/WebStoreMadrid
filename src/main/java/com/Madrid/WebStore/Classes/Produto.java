@@ -1,7 +1,10 @@
 // Produto.java
 package com.Madrid.WebStore.Classes;
 
+<<<<<<< HEAD
 import com.Madrid.WebStore.DTO.ProdutoDTO;
+=======
+>>>>>>> 001401adf9a8e6441ac523a6cefa1a36752c6f41
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -27,6 +30,11 @@ public class Produto {
 
     @NotBlank
     private String marca;
+<<<<<<< HEAD
+=======
+
+    private String medidas;
+>>>>>>> 001401adf9a8e6441ac523a6cefa1a36752c6f41
 
     @NotBlank
     private String tipo;
@@ -45,7 +53,11 @@ public class Produto {
     private List<Cliente> cliente;
 
     public Produto(Integer id, String nomeProduto, String cor, String tamanho, String marca,
+<<<<<<< HEAD
                    String tipo, Double valor, boolean estoque, Categoria categoria) {
+=======
+                   String medidas, String tipo, Double valor, boolean estoque, Categoria categoria) {
+>>>>>>> 001401adf9a8e6441ac523a6cefa1a36752c6f41
         this.id = id;
         this.nomeProduto = nomeProduto;
         this.cor = cor;
@@ -55,6 +67,7 @@ public class Produto {
         this.valor = valor;
         this.estoque = estoque;
         this.categoria = categoria;
+<<<<<<< HEAD
     }
 
     public static Produto fromDTO(ProdutoDTO produtoDTO) {
@@ -67,6 +80,8 @@ public class Produto {
         produto.setValor(produtoDTO.getValor());
         produto.setEstoque(produtoDTO.isEstoque());
         return produto;
+=======
+>>>>>>> 001401adf9a8e6441ac523a6cefa1a36752c6f41
     }
 
     public Produto() {

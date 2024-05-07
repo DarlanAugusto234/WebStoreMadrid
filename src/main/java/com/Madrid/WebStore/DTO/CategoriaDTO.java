@@ -18,10 +18,13 @@ public class CategoriaDTO {
         this.nomeCategoria = nomeCategoria;
     }
 
+<<<<<<< HEAD
     public CategoriaDTO(CategoriaDTO categoriaDTO) {
         this.nomeCategoria = categoriaDTO.nomeCategoria;
     }
 
+=======
+>>>>>>> 001401adf9a8e6441ac523a6cefa1a36752c6f41
     public CategoriaDTO(Categoria categoria) {
         nomeCategoria = categoria.getNomeCategoria();
         produtos = categoria.getProduto().stream().map(ProdutoDTO::new).collect(Collectors.toList());

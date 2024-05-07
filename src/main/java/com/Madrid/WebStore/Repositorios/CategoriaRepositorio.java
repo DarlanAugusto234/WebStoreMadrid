@@ -12,4 +12,9 @@ public interface CategoriaRepositorio extends JpaRepository<Categoria, Integer> 
 
     List<Categoria> findByNomeCategoria(String nomeCategoria);
 
+<<<<<<< HEAD
+=======
+    Optional<Categoria> findById(Integer idCategoria);
+
+>>>>>>> 001401adf9a8e6441ac523a6cefa1a36752c6f41
 }
