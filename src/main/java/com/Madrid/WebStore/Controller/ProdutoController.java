@@ -1,6 +1,9 @@
 package com.Madrid.WebStore.Controller;
 
+import com.Madrid.WebStore.Classes.Categoria;
 import com.Madrid.WebStore.Classes.Produto;
+import com.Madrid.WebStore.DTO.ProdutoDTO;
+import com.Madrid.WebStore.Service.CategoriaService;
 import com.Madrid.WebStore.Service.ProdutoService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -12,14 +15,17 @@ public class ProdutoController {
 
     ProdutoService produtoService;
 
-    public ProdutoController(ProdutoService produtoService) {
+    CategoriaService categoriaService;
+
+    public ProdutoController(ProdutoService produtoService, CategoriaService categoriaService) {
         this.produtoService = produtoService;
+        this.categoriaService = categoriaService;
     }
 
     // Cadastrar Produto
     @PostMapping("/cadastrarProduto")
-    public void cadastroProduto(@Valid @RequestBody Produto produto) {
-        produtoService.cadastrarProduto(produto);
+    public void cadastrarProduto(@RequestBody ProdutoDTO produtoDTO) {
+        produtoService.cadastrarProduto(produtoDTO);
     }
 
     // Deletar Produto pelo Id
@@ -32,12 +38,6 @@ public class ProdutoController {
     @GetMapping("/listarProdutos")
     public List<Produto> listarProdutos() {
         return produtoService.listarProdutos();
-    }
-
-    // Procurar pela Categoria
-    @GetMapping("/procurarProdutoPelaCategoria/{categoria}")
-    public List<Produto> getProdutoByCategoria(@PathVariable String categoria) {
-        return produtoService.procurarProdutoPorCategoria(categoria);
     }
 
     // Procurar Produto pelo Nome

@@ -261,7 +261,7 @@
 											"top": 422.5,
 											"width": 151,
 											"height": 13,
-											"text": "Add produto ao carrinho"
+											"text": "Add produtos ao carrinho"
 										},
 										{
 											"_type": "LabelView",
@@ -1693,7 +1693,7 @@
 											"top": 290.5,
 											"width": 97,
 											"height": 13,
-											"text": "Buscar produto"
+											"text": "Buscar produtos"
 										},
 										{
 											"_type": "LabelView",
@@ -4166,7 +4166,7 @@
 											"top": 382.5,
 											"width": 174,
 											"height": 13,
-											"text": "Excluir produto do Catálogo"
+											"text": "Excluir produtos do Catálogo"
 										},
 										{
 											"_type": "LabelView",
@@ -5288,7 +5288,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGOykMDqtYv3K4="
 					},
-					"name": "Adicionar produto ao carrinho",
+					"name": "Adicionar produtos ao carrinho",
 					"extensionPoints": [
 						{
 							"_type": "UMLExtensionPoint",
@@ -5306,7 +5306,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGOykMDqtYv3K4="
 					},
-					"name": "Add produto ao carrinho",
+					"name": "Add produtos ao carrinho",
 					"ownedElements": [
 						{
 							"_type": "UMLInclude",
@@ -5847,7 +5847,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGOykMDqtYv3K4="
 					},
-					"name": "Buscar produto",
+					"name": "Buscar produtos",
 					"ownedElements": [
 						{
 							"_type": "UMLExtend",
@@ -6044,7 +6044,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGOykMDqtYv3K4="
 					},
-					"name": "Excluir produto do Catálogo",
+					"name": "Excluir produtos do Catálogo",
 					"ownedElements": [
 						{
 							"_type": "UMLExtend",

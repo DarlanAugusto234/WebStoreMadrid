@@ -1,7 +1,10 @@
 package com.Madrid.WebStore.Service;
 
+import com.Madrid.WebStore.Classes.Categoria;
 import com.Madrid.WebStore.Classes.Cliente;
 import com.Madrid.WebStore.Classes.Produto;
+import com.Madrid.WebStore.DTO.ProdutoDTO;
+import com.Madrid.WebStore.Repositorios.CategoriaRepositorio;
 import com.Madrid.WebStore.Repositorios.ClienteRepositorio;
 import com.Madrid.WebStore.Repositorios.ProdutoRepositorio;
 import org.springframework.stereotype.Service;
@@ -16,24 +19,33 @@ public class ProdutoService {
 
     ClienteRepositorio clienteRepositorio;
 
-    public ProdutoService(ProdutoRepositorio produtoRepositorio, ClienteRepositorio clienteRepositorio) {
+    CategoriaRepositorio categoriaRepositorio;
+
+    public ProdutoService(ProdutoRepositorio produtoRepositorio, ClienteRepositorio clienteRepositorio, CategoriaRepositorio categoriaRepositorio) {
         this.produtoRepositorio = produtoRepositorio;
         this.clienteRepositorio = clienteRepositorio;
+        this.categoriaRepositorio = categoriaRepositorio;
     }
 
     // Cadastrar Produto ou Atualizar
-    public void cadastrarProduto(Produto produto) {
+    public void cadastrarProduto(ProdutoDTO produtoDTO) {
+
+        // Busca a categoria correspondente ao ID
+        Categoria categoria = categoriaRepositorio.findById(produtoDTO.getIdCategoria()).orElseThrow();
+
+        // Converte o DTO em uma instância de Produto
+        Produto produto = Produto.fromDTO(produtoDTO);
+
+        // Associa a categoria ao produto
+        produto.setCategoria(categoria);
+
+        // Salva o produto no banco de dados
         produtoRepositorio.save(produto);
     }
 
     // Listar Todos os Produtos
     public List<Produto> listarProdutos() {
         return produtoRepositorio.findAll();
-    }
-
-    // Listar Produtos pela Categoria
-    public List<Produto> procurarProdutoPorCategoria(String categoria) {
-        return produtoRepositorio.findByCategoria(categoria);
     }
 
     // Procurar Produto pelo Nome
@@ -85,10 +97,11 @@ public class ProdutoService {
                     iterator.remove(); // Remove o produto do carrinho
                 }
             }
+
+            // Salva as alterações no cliente após remover o produto do carrinho
+            clienteRepositorio.save(cliente);
+
         }
-
-        clienteRepositorio.save(cliente); // Salva as alterações no cliente
-
     }
 
 }
