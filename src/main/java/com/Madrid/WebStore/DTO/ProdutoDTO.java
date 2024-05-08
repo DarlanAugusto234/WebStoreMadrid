@@ -12,7 +12,7 @@ public class ProdutoDTO {
     private String marca;
     private String tipo;
     private Double valor;
-    private Integer idCategoria; 
+    private Integer idCategoria;
     private boolean estoque;
 
     public ProdutoDTO() {
@@ -41,6 +41,19 @@ public class ProdutoDTO {
         this.valor = produtoDTO.valor;
         this.idCategoria = produtoDTO.idCategoria;
         this.estoque = produtoDTO.estoque;
+    }
+
+    public static ProdutoDTO converterDeProduto(Produto produto) {
+        ProdutoDTO produtoDTO = new ProdutoDTO();
+        produtoDTO.setNomeProduto(produto.getNomeProduto());
+        produtoDTO.setCor(produto.getCor());
+        produtoDTO.setTamanho(produto.getTamanho());
+        produtoDTO.setMarca(produto.getMarca());
+        produtoDTO.setTipo(produto.getTipo());
+        produtoDTO.setValor(produto.getValor());
+        produtoDTO.setIdCategoria(produto.getCategoria().getId());
+        produtoDTO.setEstoque(produto.isEstoque());
+        return produtoDTO;
     }
 
     // Construtor da classe ProdutoDTO que inicializa seus atributos com os valores correspondentes do objeto Produto fornecido

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProdutoService {
@@ -28,7 +29,6 @@ public class ProdutoService {
     }
 
     // Cadastrar Produto ou Atualizar
-
     public void cadastrarProduto(ProdutoDTO produtoDTO) {
         // Busca a categoria correspondente ao ID
         Categoria categoria = categoriaRepositorio.findById(produtoDTO.getIdCategoria()).orElseThrow();
@@ -44,12 +44,14 @@ public class ProdutoService {
     }
 
     // Listar Todos os Produtos
-    public List<Produto> listarProdutos() {
-        return produtoRepositorio.findAll();
+    public List<ProdutoDTO> listarProdutos() {
+        return produtoRepositorio.findAll().stream()
+                .map(ProdutoDTO::converterDeProduto)
+                .collect(Collectors.toList());
     }
 
     // Procurar Produto pelo Nome
-    public List<Produto> procurarProdutoPorNome(String nome) {
+    public List<ProdutoDTO> procurarProdutoPorNome(String nome) {
         return produtoRepositorio.findByNomeProduto(nome);
     }
 

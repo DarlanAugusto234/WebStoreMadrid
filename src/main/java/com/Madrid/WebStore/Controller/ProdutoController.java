@@ -29,14 +29,14 @@ public class ProdutoController {
     }
 
     // Listar Todos os Produtos
-    @GetMapping("/listarProdutos")
-    public List<Produto> listarProdutos() {
+    @GetMapping("/listarTodosProdutos")
+    public List<ProdutoDTO> listarProdutos() {
         return produtoService.listarProdutos();
     }
 
     // Procurar Produto pelo Nome
-    @GetMapping("/procurarProduto/{nome}")
-    public List<Produto> getProdutoByNome(@PathVariable String nome) {
+    @GetMapping("/procurarProdutoPeloNome/{nome}")
+    public List<ProdutoDTO> procurarProdutoPorNome(@PathVariable String nome) {
         return produtoService.procurarProdutoPorNome(nome);
     }
 
