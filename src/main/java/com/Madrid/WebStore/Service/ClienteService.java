@@ -37,7 +37,7 @@ public class ClienteService {
 
     // Procurar Cliente por ID
     public Cliente procurarClientePorId(Integer clienteId) {
-        return clienteRepositorio.findById(clienteId).get();
+        return clienteRepositorio.findById(clienteId).orElseThrow();
     }
 
     // Procurar Cliente por Nome
