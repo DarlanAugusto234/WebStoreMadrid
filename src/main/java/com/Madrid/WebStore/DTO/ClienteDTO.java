@@ -13,12 +13,15 @@ public class ClienteDTO {
     private String telefone;
     private String cpf;
     private List<ProdutoDTO> produto;
+    private List<Integer> produtosNoCarrinho;
 
     public ClienteDTO() {
     }
 
-    // FALTANDO COMENTARIO
-    public ClienteDTO(String nome, String endereco, String emailCliente, String telefone, String cpf, List<ProdutoDTO> produto) {
+    // Construtor da classe ClienteDTO que inicializa seus atributos com os valores
+    // fornecidos
+    public ClienteDTO(String nome, String endereco, String emailCliente, String telefone, String cpf,
+                      List<ProdutoDTO> produto) {
         this.nome = nome;
         this.endereco = endereco;
         this.emailCliente = emailCliente;
@@ -27,15 +30,16 @@ public class ClienteDTO {
         this.produto = produto;
     }
 
-    // FALTANDO COMENTARIO
+    // Construtor responsável por criar um ClienteDTO a partir de um objeto Cliente
     public ClienteDTO(Cliente cliente) {
         nome = cliente.getNome();
         endereco = cliente.getEndereco();
         telefone = cliente.getTelefone();
         cpf = cliente.getCpf();
         emailCliente = cliente.getEmailCliente();
-        // FALTANDO COMENTARIO NESSA LINHA TODA
-        produto = cliente.getProduto().stream().map(ProdutoDTO::new).collect(Collectors.toList()); // Alteração para mapear para ProdutoDTO
+        // Mapeia a lista de produtos do cliente para uma lista de ProdutoDTOs
+        produto = cliente.getProduto().stream().map(ProdutoDTO::new).collect(Collectors.toList()); // Converte para
+        // ProdutoDTO
     }
 
     public List<ProdutoDTO> getProduto() {
@@ -86,10 +90,19 @@ public class ClienteDTO {
         this.emailCliente = emailCliente;
     }
 
-    // FALTANDO COMENTARIO
-    public static List<ClienteDTO> convert(List<Cliente> cliente){
+    // Converte uma lista de objetos Cliente para uma lista de objetos ClienteDTO
+    public static List<ClienteDTO> convert(List<Cliente> cliente) {
         return cliente.stream().map(ClienteDTO::new).collect(Collectors.toList());
     }
 
-}
+    // Método para adicionar um produto ao carrinho
+    public void adicionarProdutoAoCarrinho(Integer produtoId) {
+        produtosNoCarrinho.add(produtoId);
+    }
 
+    // Método para remover um produto do carrinho
+    public void removerProdutoDoCarrinho(Integer produtoId) {
+        produtosNoCarrinho.remove(produtoId);
+    }
+
+}

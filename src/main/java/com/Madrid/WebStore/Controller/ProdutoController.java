@@ -1,8 +1,8 @@
 package com.Madrid.WebStore.Controller;
 
 import com.Madrid.WebStore.Classes.Produto;
+import com.Madrid.WebStore.DTO.ProdutoDTO;
 import com.Madrid.WebStore.Service.ProdutoService;
-import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 @RestController
 public class ProdutoController {
 
-    ProdutoService produtoService;
+    private final ProdutoService produtoService;
 
     public ProdutoController(ProdutoService produtoService) {
         this.produtoService = produtoService;
@@ -18,8 +18,8 @@ public class ProdutoController {
 
     // Cadastrar Produto
     @PostMapping("/cadastrarProduto")
-    public void cadastroProduto(@Valid @RequestBody Produto produto) {
-        produtoService.cadastrarProduto(produto);
+    public void cadastrarProduto(@RequestBody ProdutoDTO produtoDTO) {
+        produtoService.cadastrarProduto(produtoDTO);
     }
 
     // Deletar Produto pelo Id
@@ -29,20 +29,14 @@ public class ProdutoController {
     }
 
     // Listar Todos os Produtos
-    @GetMapping("/listarProdutos")
-    public List<Produto> listarProdutos() {
+    @GetMapping("/listarTodosProdutos")
+    public List<ProdutoDTO> listarProdutos() {
         return produtoService.listarProdutos();
     }
 
-    // Procurar pela Categoria
-    @GetMapping("/procurarProdutoPelaCategoria/{categoria}")
-    public List<Produto> getProdutoByCategoria(@PathVariable String categoria) {
-        return produtoService.procurarProdutoPorCategoria(categoria);
-    }
-
     // Procurar Produto pelo Nome
-    @GetMapping("/procurarProduto/{nome}")
-    public List<Produto> getProdutoByNome(@PathVariable String nome) {
+    @GetMapping("/procurarProdutoPeloNome/{nome}")
+    public List<ProdutoDTO> procurarProdutoPorNome(@PathVariable String nome) {
         return produtoService.procurarProdutoPorNome(nome);
     }
 

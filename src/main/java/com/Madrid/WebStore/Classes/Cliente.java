@@ -15,15 +15,12 @@ public class Cliente extends Pessoa {
     @NotBlank
     private String senhaCliente;
 
-
     @ManyToMany
-    // FALTANDO COMENTARIO O JOINTABLE
-    @JoinTable(name = "Carrinho",
+    // Define a tabela de junção para a associação muitos-para-muitos entre Cliente e Produto
+    @JoinTable(name = "Carrinho", 
             joinColumns = @JoinColumn(name = "cliente_id"),
-            inverseJoinColumns = @JoinColumn(name = "produto_id")
-    )
+            inverseJoinColumns = @JoinColumn(name = "produto_id"))
     private List<Produto> produto;
-
 
     public Cliente() {
     }

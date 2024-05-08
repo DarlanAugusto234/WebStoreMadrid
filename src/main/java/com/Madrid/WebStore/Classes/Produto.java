@@ -1,10 +1,10 @@
-// Produto.java
 package com.Madrid.WebStore.Classes;
 
+import com.Madrid.WebStore.DTO.ProdutoDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-
 import java.util.List;
 
 @Entity
@@ -15,47 +15,64 @@ public class Produto {
     private Integer id;
 
     @NotBlank
-    public String nomeProduto;
+    private String nomeProduto;
 
     @NotBlank
-    public String cor;
+    private String cor;
 
     @NotBlank
-    public String tamanho;
+    private String tamanho;
 
     @NotBlank
-    public String marca;
-
-    public String medidas;
+    private String marca;
 
     @NotBlank
-    public String tipo;
+    private String tipo;
 
     @NotNull
-    public Double valor;
+    private Double valor;
 
-    @NotBlank
-    public String categoria;
+    private boolean estoque;
 
-    public boolean estoque;
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
 
-    @ManyToMany(mappedBy = "produto")
-    private List<Cliente> cliente;
+    @ManyToMany(mappedBy = "produtos")
+    @JsonIgnore
+    private List<Cliente> clientes;
 
-    public Produto(String nomeProduto, String cor, String tamanho, String marca, String medidas, String tipo, Double valor, String categoria, boolean estoque) {
+    public Produto() {
+    }
+
+    // Utilizando construtor para inicializar todos os atributos da classe
+    public Produto(Integer id, String nomeProduto, String cor, String tamanho, String marca,
+                   String tipo, Double valor, boolean estoque, Categoria categoria) {
+        this.id = id;
         this.nomeProduto = nomeProduto;
         this.cor = cor;
         this.tamanho = tamanho;
         this.marca = marca;
-        this.medidas = medidas;
         this.tipo = tipo;
         this.valor = valor;
-        this.categoria = categoria;
         this.estoque = estoque;
+        this.categoria = categoria;
     }
 
-    public Produto() {
+    // COMENTAR
+    public static Produto fromDTO(ProdutoDTO produtoDTO) {
+        Produto produto = new Produto();
+        produto.setNomeProduto(produtoDTO.getNomeProduto());
+        produto.setCor(produtoDTO.getCor());
+        produto.setTamanho(produtoDTO.getTamanho());
+        produto.setMarca(produtoDTO.getMarca());
+        produto.setTipo(produtoDTO.getTipo());
+        produto.setValor(produtoDTO.getValor());
+        produto.setEstoque(produtoDTO.isEstoque());
+        return produto;
     }
+
+    // Getters e setters
 
     public Integer getId() {
         return id;
@@ -97,14 +114,6 @@ public class Produto {
         this.marca = marca;
     }
 
-    public String getMedidas() {
-        return medidas;
-    }
-
-    public void setMedidas(String medidas) {
-        this.medidas = medidas;
-    }
-
     public String getTipo() {
         return tipo;
     }
@@ -121,33 +130,42 @@ public class Produto {
         this.valor = valor;
     }
 
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
     public boolean isEstoque() {
-        return estoque = estoque;
-    }
-
-    // Adicionando um método para verificar se o produto está disponível para venda
-    public boolean disponivelParaVenda() {
-        return estoque; // Retorna true se o produto estiver em estoque
+        return estoque;
     }
 
     public void setEstoque(boolean estoque) {
         this.estoque = estoque;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
+    }
+
+    // Adicionando métodos para ativar e desativar o produto
     public void ativar() {
         this.estoque = true;
     }
 
     public void desativar() {
         this.estoque = false;
+    }
+
+    // Adicionando um método para verificar se o produto está disponível para venda
+    public boolean disponivelParaVenda() {
+        return estoque; // Retorna true se o produto estiver em estoque
     }
 
 }

@@ -1,37 +1,37 @@
 package com.Madrid.WebStore.DTO;
 
 import com.Madrid.WebStore.Classes.Produto;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProdutoDTO {
 
-    public String nomeProduto;
-    public String cor;
-    public String tamanho;
-    public String marca;
-    public String tipo;
-    public Double valor;
-    public String categoria;
-    public boolean estoque;
+    private String nomeProduto;
+    private String cor;
+    private String tamanho;
+    private String marca;
+    private String tipo;
+    private Double valor;
+    private Integer idCategoria;
+    private boolean estoque;
 
     public ProdutoDTO() {
     }
 
-    // FALTANDO COMENTARIO
-    public ProdutoDTO(String nomeProduto, String cor, String tamanho, String marca, String tipo, Double valor, String categoria, boolean estoque) {
+    // Construtor para inicializar os atributos do ProdutoDTO com os valores especificados
+    public ProdutoDTO(String nomeProduto, String cor, String tamanho, String marca, String tipo,
+                      Double valor, Integer idCategoria, boolean estoque) {
         this.nomeProduto = nomeProduto;
         this.cor = cor;
         this.tamanho = tamanho;
         this.marca = marca;
         this.tipo = tipo;
         this.valor = valor;
-        this.categoria = categoria;
+        this.idCategoria = idCategoria;
         this.estoque = estoque;
     }
 
-    // FALTANDO COMENTARIO
+    // Construtor de cópia para criar um novo ProdutoDTO a partir de outro ProdutoDTO fornecido
     public ProdutoDTO(ProdutoDTO produtoDTO) {
         this.nomeProduto = produtoDTO.nomeProduto;
         this.cor = produtoDTO.cor;
@@ -39,11 +39,24 @@ public class ProdutoDTO {
         this.marca = produtoDTO.marca;
         this.tipo = produtoDTO.tipo;
         this.valor = produtoDTO.valor;
-        this.categoria = produtoDTO.categoria;
+        this.idCategoria = produtoDTO.idCategoria;
         this.estoque = produtoDTO.estoque;
     }
 
-    // FALTANDO COMENTARIO
+    public static ProdutoDTO converterDeProduto(Produto produto) {
+        ProdutoDTO produtoDTO = new ProdutoDTO();
+        produtoDTO.setNomeProduto(produto.getNomeProduto());
+        produtoDTO.setCor(produto.getCor());
+        produtoDTO.setTamanho(produto.getTamanho());
+        produtoDTO.setMarca(produto.getMarca());
+        produtoDTO.setTipo(produto.getTipo());
+        produtoDTO.setValor(produto.getValor());
+        produtoDTO.setIdCategoria(produto.getCategoria().getId());
+        produtoDTO.setEstoque(produto.isEstoque());
+        return produtoDTO;
+    }
+
+    // Construtor da classe ProdutoDTO que inicializa seus atributos com os valores correspondentes do objeto Produto fornecido
     public ProdutoDTO(Produto produto) {
         this.nomeProduto = produto.getNomeProduto();
         this.cor = produto.getCor();
@@ -51,12 +64,12 @@ public class ProdutoDTO {
         this.marca = produto.getMarca();
         this.tipo = produto.getTipo();
         this.valor = produto.getValor();
-        this.categoria = produto.getCategoria();
+        this.idCategoria = produto.getCategoria().getId(); // Obtenção do ID da categoria
         this.estoque = produto.isEstoque();
     }
 
-    // FALTANDO COMENTARIO
-    public static List<ProdutoDTO> convert(List<ProdutoDTO> produtos) {
+    // Método estático para converter uma lista de objetos ProdutoDTO em uma nova lista de ProdutoDTOs
+    public static List<ProdutoDTO> convert(List<Produto> produtos) {
         return produtos.stream().map(ProdutoDTO::new).collect(Collectors.toList());
     }
 
@@ -108,12 +121,12 @@ public class ProdutoDTO {
         this.valor = valor;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public Integer getIdCategoria() {
+        return idCategoria;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setIdCategoria(Integer idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
     public boolean isEstoque() {
@@ -123,5 +136,4 @@ public class ProdutoDTO {
     public void setEstoque(boolean estoque) {
         this.estoque = estoque;
     }
-
 }
