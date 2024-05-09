@@ -35,7 +35,7 @@ public class CategoriaController {
     }
 
     // COMENTAR AQUI
-    @GetMapping("/categorias/{categoriaId}")
+    @GetMapping("/procurarCategoriasPorId/{categoriaId}")
     public Categoria procurarPeloId(@PathVariable Integer categoriaId) {
         return categoriaService.procurarPeloId(categoriaId);
     }

@@ -41,7 +41,7 @@ public class FuncionarioController {
     }
 
     // Deletar Cliente ou Excluir Conta
-    @DeleteMapping("/deletarCliente/{id}")
+    @DeleteMapping("/deletarFuncionario/{id}")
     public void deletarFuncionario(@PathVariable Integer id) {
         funcionarioService.deletarFuncionario(id);
     }

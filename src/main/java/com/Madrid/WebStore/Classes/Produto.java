@@ -38,7 +38,7 @@ public class Produto {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    @ManyToMany(mappedBy = "produtos")
+    @ManyToMany(mappedBy = "produto")
     @JsonIgnore
     private List<Cliente> clientes;
 
