@@ -1,16 +1,21 @@
 package com.Madrid.WebStore.Controller;
 
 import com.Madrid.WebStore.Classes.Categoria;
+import com.Madrid.WebStore.DTO.CategoriaDTO;
 import com.Madrid.WebStore.Service.CategoriaService;
 import jakarta.validation.Valid;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class CategoriaController {
 
     CategoriaService categoriaService;
+
+    ModelMapper modelMapper;
 
     public CategoriaController(CategoriaService categoriaService) {
         this.categoriaService = categoriaService;
@@ -24,7 +29,7 @@ public class CategoriaController {
 
     // COMENTAR AQUI
     @GetMapping("/listarCategorias")
-    public List<Categoria> listarCategorias() {
+    public List<CategoriaDTO> listarCategorias() {
         return categoriaService.listarCategorias();
     }
 

@@ -1,10 +1,13 @@
 package com.Madrid.WebStore.Service;
 
+import com.Madrid.WebStore.Classes.Funcionario;
 import com.Madrid.WebStore.DTO.FuncionarioDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.Madrid.WebStore.Repositorios.FuncionarioRepositorio;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,6 +15,8 @@ import java.util.stream.Collectors;
 public class FuncionarioService {
 
     FuncionarioRepositorio funcionarioRepositorio;
+
+    ModelMapper modelMapper;
 
     public FuncionarioService(FuncionarioRepositorio funcionarioRepositorio) {
         this.funcionarioRepositorio = funcionarioRepositorio;
@@ -24,9 +29,14 @@ public class FuncionarioService {
 
     // Procurar Funcionário por Nome
     public List<FuncionarioDTO> procurarFuncionarioPorNome(String nome) {
-        return funcionarioRepositorio.findByNome(nome).stream()
-                .map(FuncionarioDTO::converterDeFuncionario)
-                .collect(Collectors.toList());
+        List<Funcionario> funcionarios = funcionarioRepositorio.findByNomeContainingIgnoreCase(nome);
+        List<FuncionarioDTO> funcionariosDTO = new ArrayList<>();
+
+        for (Funcionario funcionario : funcionarios) {
+            funcionariosDTO.add(modelMapper.map(funcionario, FuncionarioDTO.class));
+        }
+
+        return funcionariosDTO;
     }
 
     // Procurar Funcionário por Id
@@ -38,9 +48,15 @@ public class FuncionarioService {
 
     // Listar Todos os Funcionarios
     public List<FuncionarioDTO> listarTodosFuncionarios() {
-        return funcionarioRepositorio.findAll().stream()
-                .map(FuncionarioDTO::converterDeFuncionario)
-                .collect(Collectors.toList());
+        List<Funcionario> funcionarios = funcionarioRepositorio.findAll();
+        List<FuncionarioDTO> funcionariosDTO = new ArrayList<>();
+
+        for (Funcionario funcionario : funcionarios) {
+            FuncionarioDTO funcionarioDTO = modelMapper.map(funcionario, FuncionarioDTO.class);
+            funcionariosDTO.add(funcionarioDTO);
+        }
+
+        return funcionariosDTO;
     }
 
     // Deletar Cliente pelo Id

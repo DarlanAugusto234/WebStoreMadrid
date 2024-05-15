@@ -1,7 +1,13 @@
 package com.Madrid.WebStore.DTO;
 
 import com.Madrid.WebStore.Classes.Cliente;
+import com.Madrid.WebStore.Classes.Produto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Transient;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,16 +18,15 @@ public class ClienteDTO {
     private String emailCliente;
     private String telefone;
     private String cpf;
-    private List<ProdutoDTO> produto;
+    private List<Produto> produto;
     private List<Integer> produtosNoCarrinho;
+    private ModelMapper modelMapper = new ModelMapper();
 
     public ClienteDTO() {
     }
 
-    // Construtor da classe ClienteDTO que inicializa seus atributos com os valores
-    // fornecidos
-    public ClienteDTO(String nome, String endereco, String emailCliente, String telefone, String cpf,
-                      List<ProdutoDTO> produto) {
+    public ClienteDTO(String nome, String endereco, String emailCliente, String telefone,
+                      String cpf, List<Produto> produto) {
         this.nome = nome;
         this.endereco = endereco;
         this.emailCliente = emailCliente;
@@ -32,21 +37,36 @@ public class ClienteDTO {
 
     // Construtor responsável por criar um ClienteDTO a partir de um objeto Cliente
     public ClienteDTO(Cliente cliente) {
-        nome = cliente.getNome();
-        endereco = cliente.getEndereco();
-        telefone = cliente.getTelefone();
-        cpf = cliente.getCpf();
-        emailCliente = cliente.getEmailCliente();
+        modelMapper.getConfiguration().setAmbiguityIgnored(true);
+
+        // Mapeia os atributos simples do cliente para o DTO
+        modelMapper.map(cliente, this);
+
         // Mapeia a lista de produtos do cliente para uma lista de ProdutoDTOs
-        produto = cliente.getProduto().stream().map(ProdutoDTO::new).collect(Collectors.toList()); // Converte para
-        // ProdutoDTO
+        produto = modelMapper.map(cliente.getProduto(), new TypeToken<List<ProdutoDTO>>() {}.getType());
+
+        // Mapeia a lista de IDs de produtos no carrinho do cliente
+        produtosNoCarrinho = new ArrayList<>();
+        List<Produto> produtos = cliente.getProduto();
+        for (Produto produto : produtos) {
+            produtosNoCarrinho.add(produto.getId());
+        }
     }
 
-    public List<ProdutoDTO> getProduto() {
+    public List<Integer> getProdutosNoCarrinho() {
+        return produtosNoCarrinho;
+    }
+
+    public void setProdutosNoCarrinho(List<Integer> produtosNoCarrinho) {
+        this.produtosNoCarrinho = produtosNoCarrinho;
+    }
+
+    // Getters e Setters
+    public List<Produto> getProduto() {
         return produto;
     }
 
-    public void setProduto(List<ProdutoDTO> produto) {
+    public void setProduto(List<Produto> produto) {
         this.produto = produto;
     }
 
@@ -89,20 +109,4 @@ public class ClienteDTO {
     public void setEmailCliente(String emailCliente) {
         this.emailCliente = emailCliente;
     }
-
-    // Converte uma lista de objetos Cliente para uma lista de objetos ClienteDTO
-    public static List<ClienteDTO> convert(List<Cliente> cliente) {
-        return cliente.stream().map(ClienteDTO::new).collect(Collectors.toList());
-    }
-
-    // Método para adicionar um produto ao carrinho
-    public void adicionarProdutoAoCarrinho(Integer produtoId) {
-        produtosNoCarrinho.add(produtoId);
-    }
-
-    // Método para remover um produto do carrinho
-    public void removerProdutoDoCarrinho(Integer produtoId) {
-        produtosNoCarrinho.remove(produtoId);
-    }
-
 }

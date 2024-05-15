@@ -3,6 +3,8 @@ package com.Madrid.WebStore.Controller;
 import com.Madrid.WebStore.DTO.FuncionarioDTO;
 import com.Madrid.WebStore.Service.FuncionarioService;
 import jakarta.validation.Valid;
+import org.modelmapper.ModelMapper;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +13,8 @@ import java.util.List;
 public class FuncionarioController {
 
     FuncionarioService funcionarioService;
+
+    ModelMapper modelMapper;
 
     public FuncionarioController(FuncionarioService funcionarioService) {
         this.funcionarioService = funcionarioService;

@@ -5,17 +5,23 @@ import com.Madrid.WebStore.Classes.Produto;
 import com.Madrid.WebStore.DTO.ClienteDTO;
 import com.Madrid.WebStore.Service.ClienteService;
 import jakarta.validation.Valid;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class ClienteController {
 
     ClienteService clienteService;
 
-    public ClienteController(ClienteService clienteService) {
+    ModelMapper modelMapper;
+
+    public ClienteController(ClienteService clienteService, ModelMapper modelMapper) {
         this.clienteService = clienteService;
+        this.modelMapper = modelMapper;
     }
 
     // Metodo para Cadastrar ou Atualizar Cliente
@@ -26,9 +32,8 @@ public class ClienteController {
 
     // Listar Todos os ClientesDTO
     @GetMapping("/listarTodosOsClientes")
-    public List<ClienteDTO> buscarCliente() {
-        List<Cliente> cliente = clienteService.listarCliente();
-        return ClienteDTO.convert(cliente);
+    public List<ClienteDTO> listarClientes() {
+        return clienteService.listarClientes();
     }
 
     // Procurar Pelo Id do Cliente

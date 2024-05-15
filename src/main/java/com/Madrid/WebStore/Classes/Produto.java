@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.modelmapper.ModelMapper;
+
 import java.util.List;
 
 @Entity
@@ -42,6 +44,8 @@ public class Produto {
     @JsonIgnore
     private List<Cliente> clientes;
 
+    private static ModelMapper modelMapper = new ModelMapper();
+
     public Produto() {
     }
 
@@ -59,20 +63,22 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    // COMENTAR
+    // Atualização do método fromDTO usando ModelMapper
     public static Produto fromDTO(ProdutoDTO produtoDTO) {
-        Produto produto = new Produto();
-        produto.setNomeProduto(produtoDTO.getNomeProduto());
-        produto.setCor(produtoDTO.getCor());
-        produto.setTamanho(produtoDTO.getTamanho());
-        produto.setMarca(produtoDTO.getMarca());
-        produto.setTipo(produtoDTO.getTipo());
-        produto.setValor(produtoDTO.getValor());
-        produto.setEstoque(produtoDTO.isEstoque());
+        // Cria uma instância de ModelMapper
+        ModelMapper modelMapper = new ModelMapper();
+
+        // Mapeia o ProdutoDTO para a entidade Produto
+        Produto produto = modelMapper.map(produtoDTO, Produto.class);
+
         return produto;
     }
 
-    // Getters e setters
+    // Método para converter Produto para ProdutoDTO usando ModelMapper
+    public ProdutoDTO toDTO() {
+        return modelMapper.map(this, ProdutoDTO.class);
+    }
+
 
     public Integer getId() {
         return id;

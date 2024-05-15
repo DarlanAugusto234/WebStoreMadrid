@@ -9,6 +9,7 @@ import com.Madrid.WebStore.Repositorios.ClienteRepositorio;
 import com.Madrid.WebStore.Repositorios.ProdutoRepositorio;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,14 +46,20 @@ public class ProdutoService {
 
     // Listar Todos os Produtos
     public List<ProdutoDTO> listarProdutos() {
-        return produtoRepositorio.findAll().stream()
-                .map(ProdutoDTO::converterDeProduto)
-                .collect(Collectors.toList());
+        List<Produto> produtos = produtoRepositorio.findAll();
+        List<ProdutoDTO> produtosDTO = new ArrayList<>();
+
+        for (Produto produto : produtos) {
+            ProdutoDTO produtoDTO = produto.toDTO();
+            produtosDTO.add(produtoDTO);
+        }
+
+        return produtosDTO;
     }
 
     // Procurar Produto pelo Nome
     public List<ProdutoDTO> procurarProdutoPorNome(String nome) {
-        return produtoRepositorio.findByNomeProduto(nome);
+        return produtoRepositorio.findByNomeProdutoContainingIgnoreCase(nome);
     }
 
     // Deletar Produto Pelo Id
