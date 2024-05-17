@@ -1,7 +1,13 @@
 package com.Madrid.WebStore.Classes;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -9,15 +15,20 @@ import java.util.List;
 @Entity
 public class Cliente extends Pessoa {
 
-    @NotBlank
+    @NotBlank(message = "O Email do Cliente não pode estar em branco")
+    @Email(message = "O Email do Cliente deve ser válido")
     private String emailCliente;
 
-    @NotBlank
+    @NotBlank(message = "A Senha não pode estar em branco")
+    @Size(min = 8, max = 20, message = "A Senha deve ter entre 8 e 20 caracteres")
+    @Pattern(
+            regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d{4,}).{8,20}$",
+            message = "Sua Senha deve conter pelo menos uma letra maiúscula, uma letra minúscula e quatro números")
     private String senhaCliente;
 
     @ManyToMany
     // Define a tabela de junção para a associação muitos-para-muitos entre Cliente e Produto
-    @JoinTable(name = "Carrinho", 
+    @JoinTable(name = "Carrinho",
             joinColumns = @JoinColumn(name = "cliente_id"),
             inverseJoinColumns = @JoinColumn(name = "produto_id"))
     private List<Produto> produto;

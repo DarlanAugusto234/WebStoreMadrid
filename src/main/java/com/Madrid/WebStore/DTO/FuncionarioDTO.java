@@ -1,10 +1,9 @@
 package com.Madrid.WebStore.DTO;
 
 import com.Madrid.WebStore.Classes.Funcionario;
+import org.modelmapper.ModelMapper;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class FuncionarioDTO {
 
@@ -85,43 +84,14 @@ public class FuncionarioDTO {
         this.senhaFuncionario = senhaFuncionario;
     }
 
-    public Funcionario converterParaFuncionario() {
-        Funcionario funcionario = new Funcionario();
-        funcionario.setNome(this.nome);
-        funcionario.setDataNascimento(this.dataNascimento);
-        funcionario.setEndereco(this.endereco);
-        funcionario.setTelefone(this.telefone);
-        funcionario.setCpf(this.cpf);
-        funcionario.setEmailFuncionario(this.emailFuncionario);
-        funcionario.setSenhaFuncionario(this.senhaFuncionario);
-        return funcionario;
+    // Utilizando ModelMapper para converter de FuncionarioDTO para Funcionario
+    public static Funcionario fromEmployeeDTOtoEmployee(FuncionarioDTO funcionarioDTO, ModelMapper modelMapper) {
+        return modelMapper.map(funcionarioDTO, Funcionario.class);
     }
 
-    public static FuncionarioDTO converterDeFuncionario(Funcionario funcionario) {
-        FuncionarioDTO funcionarioDTO = new FuncionarioDTO();
-        funcionarioDTO.setNome(funcionario.getNome());
-        funcionarioDTO.setDataNascimento(funcionario.getDataNascimento());
-        funcionarioDTO.setEndereco(funcionario.getEndereco());
-        funcionarioDTO.setTelefone(funcionario.getTelefone());
-        funcionarioDTO.setCpf(funcionario.getCpf());
-        funcionarioDTO.setEmailFuncionario(funcionario.getEmailFuncionario());
-        funcionarioDTO.setSenhaFuncionario(funcionario.getSenhaFuncionario());
-        return funcionarioDTO;
-    }
-
-    // Método para converter lista de Funcionario para lista de FuncionarioDTO
-    public static List<FuncionarioDTO> converterListaDeFuncionarios(List<Funcionario> funcionarios) {
-        return funcionarios.stream()
-                .map(funcionario -> new FuncionarioDTO(
-                        funcionario.getNome(),
-                        funcionario.getDataNascimento(),
-                        funcionario.getEndereco(),
-                        funcionario.getTelefone(),
-                        funcionario.getCpf(),
-                        funcionario.getEmailFuncionario(),
-                        funcionario.getSenhaFuncionario()
-                ))
-                .collect(Collectors.toList());
+    // Utilizando ModelMapper para converter de Funcionario para FuncionarioDTO
+    public static FuncionarioDTO fromEmployeeToEmployeeDTO(Funcionario funcionario, ModelMapper modelMapper) {
+        return modelMapper.map(funcionario, FuncionarioDTO.class);
     }
 
 }

@@ -1,10 +1,12 @@
 package com.Madrid.WebStore.Classes;
 
-import com.Madrid.WebStore.DTO.ProdutoDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+
 import java.util.List;
 
 @Entity
@@ -14,31 +16,35 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @NotBlank
+    @NotBlank(message = "O Nome do produto não pode estar em branco")
     private String nomeProduto;
 
-    @NotBlank
+    @NotBlank(message = "A Cor não pode estar em branco")
     private String cor;
 
-    @NotBlank
+    @NotBlank(message = "Tamanho não pode estar em branco")
+    @Pattern(regexp = "^[PMLGX]{1,3}$", message = "Tamanho deve ser P, M, G, GG ou XGG")
     private String tamanho;
 
-    @NotBlank
+    @NotBlank(message = "A Marca não pode estar em branco")
     private String marca;
 
-    @NotBlank
-    private String tipo;
+    @NotBlank(message = "O Tecido não pode estar em branco")
+    private String tecido;
 
-    @NotNull
+    @NotNull(message = "O Valor não pode ser nulo")
+    @Pattern(regexp = "^[0-9]+(\\.[0-9]{1,2})?$", message = "O Valor deve ser um número válido com até duas casas decimais")
     private Double valor;
 
-    private boolean estoque;
+    @NotBlank
+    @Min(value = 0, message = "O estoque deve ser um número inteiro não negativo")
+    private Integer estoque;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    @ManyToMany(mappedBy = "produtos")
+    @ManyToMany(mappedBy = "produto")
     @JsonIgnore
     private List<Cliente> clientes;
 
@@ -46,33 +52,27 @@ public class Produto {
     }
 
     // Utilizando construtor para inicializar todos os atributos da classe
-    public Produto(Integer id, String nomeProduto, String cor, String tamanho, String marca,
-                   String tipo, Double valor, boolean estoque, Categoria categoria) {
-        this.id = id;
+
+    public Produto(String nomeProduto, String cor, String tamanho, String marca, String tecido,
+                   Double valor, Integer estoque, Categoria categoria, List<Cliente> clientes) {
         this.nomeProduto = nomeProduto;
         this.cor = cor;
         this.tamanho = tamanho;
         this.marca = marca;
-        this.tipo = tipo;
+        this.tecido = tecido;
         this.valor = valor;
         this.estoque = estoque;
         this.categoria = categoria;
+        this.clientes = clientes;
     }
 
-    // COMENTAR
-    public static Produto fromDTO(ProdutoDTO produtoDTO) {
-        Produto produto = new Produto();
-        produto.setNomeProduto(produtoDTO.getNomeProduto());
-        produto.setCor(produtoDTO.getCor());
-        produto.setTamanho(produtoDTO.getTamanho());
-        produto.setMarca(produtoDTO.getMarca());
-        produto.setTipo(produtoDTO.getTipo());
-        produto.setValor(produtoDTO.getValor());
-        produto.setEstoque(produtoDTO.isEstoque());
-        return produto;
+    public Integer getEstoque() {
+        return estoque;
     }
 
-    // Getters e setters
+    public void setEstoque(Integer estoque) {
+        this.estoque = estoque;
+    }
 
     public Integer getId() {
         return id;
@@ -114,12 +114,12 @@ public class Produto {
         this.marca = marca;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getTecido() {
+        return tecido;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setTecido(String tecido) {
+        this.tecido = tecido;
     }
 
     public Double getValor() {
@@ -128,14 +128,6 @@ public class Produto {
 
     public void setValor(Double valor) {
         this.valor = valor;
-    }
-
-    public boolean isEstoque() {
-        return estoque;
-    }
-
-    public void setEstoque(boolean estoque) {
-        this.estoque = estoque;
     }
 
     public Categoria getCategoria() {
@@ -154,17 +146,8 @@ public class Produto {
         this.clientes = clientes;
     }
 
-    // Adicionando métodos para ativar e desativar o produto
-    public void ativar() {
-        this.estoque = true;
-    }
-
-    public void desativar() {
-        this.estoque = false;
-    }
-
     // Adicionando um método para verificar se o produto está disponível para venda
-    public boolean disponivelParaVenda() {
+    public Integer disponivelParaVenda() {
         return estoque; // Retorna true se o produto estiver em estoque
     }
 

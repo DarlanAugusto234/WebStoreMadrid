@@ -7659,7 +7659,7 @@
 											"top": 459,
 											"width": 231,
 											"height": 13,
-											"text": "+tipo: string",
+											"text": "+tecido: string",
 											"horizontalAlignment": 0
 										},
 										{
@@ -8652,7 +8652,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGO5Am9C79qT6I="
 							},
-							"name": "tipo",
+							"name": "tecido",
 							"type": "string"
 						},
 						{
@@ -9999,7 +9999,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGO/FZWxORAVA4="
 							},
-							"name": "tipo",
+							"name": "tecido",
 							"length": 0
 						},
 						{

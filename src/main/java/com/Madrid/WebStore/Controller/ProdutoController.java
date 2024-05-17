@@ -3,6 +3,7 @@ package com.Madrid.WebStore.Controller;
 import com.Madrid.WebStore.Classes.Produto;
 import com.Madrid.WebStore.DTO.ProdutoDTO;
 import com.Madrid.WebStore.Service.ProdutoService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 @RestController
 public class ProdutoController {
 
-    private final ProdutoService produtoService;
+    ProdutoService produtoService;
 
     public ProdutoController(ProdutoService produtoService) {
         this.produtoService = produtoService;
@@ -18,7 +19,7 @@ public class ProdutoController {
 
     // Cadastrar Produto
     @PostMapping("/cadastrarProduto")
-    public void cadastrarProduto(@RequestBody ProdutoDTO produtoDTO) {
+    public void cadastrarProduto(@Valid @RequestBody ProdutoDTO produtoDTO) {
         produtoService.cadastrarProduto(produtoDTO);
     }
 
@@ -31,25 +32,13 @@ public class ProdutoController {
     // Listar Todos os Produtos
     @GetMapping("/listarTodosProdutos")
     public List<ProdutoDTO> listarProdutos() {
-        return produtoService.listarProdutos();
+        return produtoService.listarTodos();
     }
 
     // Procurar Produto pelo Nome
     @GetMapping("/procurarProdutoPeloNome/{nome}")
     public List<ProdutoDTO> procurarProdutoPorNome(@PathVariable String nome) {
         return produtoService.procurarProdutoPorNome(nome);
-    }
-
-    // Ativar Produto
-    @PutMapping("/ativarProduto/{id}")
-    public void ativarProduto(@PathVariable Integer id) {
-        produtoService.ativarProduto(id);
-    }
-
-    // Inativar Produto
-    @PutMapping("/inativarProduto/{id}")
-    public void inativarProduto(@PathVariable Integer id) {
-        produtoService.inativarProduto(id);
     }
 
 }
