@@ -35,9 +35,14 @@ public class ClienteService {
 
     // Listar Clientes
     public List<ClienteDTO> buscarClientes() {
-        return clienteRepositorio.findAll().stream()
-                .map(cliente -> modelMapper.map(cliente, ClienteDTO.class))
-                .collect(Collectors.toList());
+        List<ClienteDTO> clienteDTOs = new ArrayList<>();
+        List<Cliente> clientes = clienteRepositorio.findAll();
+
+        for (Cliente cliente : clientes) {
+            clienteDTOs.add(modelMapper.map(cliente, ClienteDTO.class));
+        }
+
+        return clienteDTOs;
     }
 
     // Deletar Cliente pelo Id
