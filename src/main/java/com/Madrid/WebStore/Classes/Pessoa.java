@@ -1,9 +1,8 @@
 package com.Madrid.WebStore.Classes;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import org.springframework.cglib.core.Local;
+import jakarta.validation.constraints.*;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
 
@@ -15,19 +14,24 @@ public abstract class Pessoa {
     @Id
     private Integer id;
 
-    @NotBlank
+    @NotBlank(message = "O nome não pode estar em branco")
+    @Size(min = 20, max = 100, message = "O nome deve ter 100 caracteres")
     private String nome;
 
-    @NotNull
+    @NotNull(message = "A data de nascimento é obrigatória")
+    @Past(message = "A data de nascimento deve ser uma data passada")
     private LocalDate dataNascimento;
 
-    @NotBlank
+    @NotBlank(message = "O endereço não pode estar em branco")
+    @Size(min = 5, max = 200, message = "O endereço deve ter entre 5 e 200 caracteres")
     private String endereco;
 
-    @NotBlank
+    @NotBlank(message = "O telefone não pode estar em branco")
+    @Pattern(regexp = "^\\(?(\\d{2})\\)?[-.\\s]?\\d{4,5}[-.\\s]?\\d{4}$", message = "O telefone deve seguir o formato (99) 99999-9999 ou (99) 9999-9999")
     private String telefone;
 
-    @NotBlank
+    @NotBlank(message = "O CPF não pode estar em branco")
+    @CPF(message = "O CPF é inválido")
     private String cpf;
 
     public Pessoa() {

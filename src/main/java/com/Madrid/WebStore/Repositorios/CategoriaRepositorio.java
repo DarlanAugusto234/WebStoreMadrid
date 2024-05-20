@@ -10,8 +10,6 @@ import java.util.Optional;
 @Repository
 public interface CategoriaRepositorio extends JpaRepository<Categoria, Integer> {
 
-    List<Categoria> findByNomeCategoria(String nomeCategoria);
-
-    Optional<Categoria> findById(Integer idCategoria);
+    List<Categoria> findByNomeCategoriaContainingIgnoreCase(String nomeCategoria);
 
 }

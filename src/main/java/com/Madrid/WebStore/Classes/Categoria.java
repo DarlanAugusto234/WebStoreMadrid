@@ -2,6 +2,7 @@ package com.Madrid.WebStore.Classes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class Categoria {
     @Id
     private Integer id;
 
+    @NotBlank
     private String nomeCategoria;
 
     @OneToMany(mappedBy = "categoria")

@@ -1,8 +1,7 @@
 package com.Madrid.WebStore.Controller;
 
-import com.Madrid.WebStore.Classes.Categoria;
 import com.Madrid.WebStore.Classes.Produto;
-import com.Madrid.WebStore.Service.CategoriaService;
+import com.Madrid.WebStore.DTO.ProdutoDTO;
 import com.Madrid.WebStore.Service.ProdutoService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -14,17 +13,14 @@ public class ProdutoController {
 
     ProdutoService produtoService;
 
-    CategoriaService categoriaService;
-
-    public ProdutoController(ProdutoService produtoService, CategoriaService categoriaService) {
+    public ProdutoController(ProdutoService produtoService) {
         this.produtoService = produtoService;
-        this.categoriaService = categoriaService;
     }
 
     // Cadastrar Produto
-    @PostMapping("/cadastrarProduto/{idCategoria}")
-    public void cadastrarProduto(@RequestBody Produto produto, @PathVariable Integer idCategoria) {
-        produtoService.cadastrarProduto(produto, idCategoria);
+    @PostMapping("/cadastrarProduto")
+    public void cadastrarProduto(@Valid @RequestBody ProdutoDTO produtoDTO) {
+        produtoService.cadastrarProduto(produtoDTO);
     }
 
     // Deletar Produto pelo Id
@@ -34,27 +30,21 @@ public class ProdutoController {
     }
 
     // Listar Todos os Produtos
-    @GetMapping("/listarProdutos")
-    public List<Produto> listarProdutos() {
-        return produtoService.listarProdutos();
+    @GetMapping("/listarTodosProdutos")
+    public List<ProdutoDTO> listarProdutos() {
+        return produtoService.listarTodos();
     }
 
     // Procurar Produto pelo Nome
-    @GetMapping("/procurarProduto/{nome}")
-    public List<Produto> getProdutoByNome(@PathVariable String nome) {
+    @GetMapping("/procurarProdutoPeloNome/{nome}")
+    public List<ProdutoDTO> procurarProdutoPorNome(@PathVariable String nome) {
         return produtoService.procurarProdutoPorNome(nome);
     }
 
-    // Ativar Produto
-    @PutMapping("/ativarProduto/{id}")
-    public void ativarProduto(@PathVariable Integer id) {
-        produtoService.ativarProduto(id);
-    }
-
-    // Inativar Produto
-    @PutMapping("/inativarProduto/{id}")
-    public void inativarProduto(@PathVariable Integer id) {
-        produtoService.inativarProduto(id);
+    // COMENTAR AQUI
+    @PutMapping("/alterarTrueOrFalseDestaque/{id}")
+    public void alternarDestaqueProduto(@PathVariable Integer id) {
+        produtoService.alternarDestaqueProduto(id);
     }
 
 }

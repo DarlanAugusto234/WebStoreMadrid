@@ -1,73 +1,56 @@
 package com.Madrid.WebStore.DTO;
 
-import com.Madrid.WebStore.Classes.Categoria;
-import com.Madrid.WebStore.Classes.Produto;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ProdutoDTO {
-
-    public String nomeProduto;
-    public String cor;
-    public String tamanho;
-    public String marca;
-    public String tipo;
-    public Double valor;
-
-    public Categoria categoria;
-    public boolean estoque;
+    @JsonIgnore
+    private Integer id;
+    private String nomeProduto;
+    private String cor;
+    private String tamanho;
+    private String marca;
+    private String tecido;
+    private Double valor;
+    private Integer quantidadeNoEstoque;
+    private boolean destaque;
+    @JsonIgnore
+    private Integer idCategoria;
+    private CategoriaDTO categoria;
 
     public ProdutoDTO() {
     }
 
-    // Construtor para inicializar os atributos do ProdutoDTO com os valores
-    // especificados
-
-
-    public ProdutoDTO(String nomeProduto, String cor, String tamanho, String marca, String tipo,
-                      Double valor, Categoria categoria, boolean estoque) {
+    public ProdutoDTO(String nomeProduto, String cor, String tamanho, String marca, String tecido, Double valor,
+                      Integer quantidadeNoEstoque, boolean destaque, Integer idCategoria, CategoriaDTO categoria) {
         this.nomeProduto = nomeProduto;
         this.cor = cor;
         this.tamanho = tamanho;
         this.marca = marca;
-        this.tipo = tipo;
+        this.tecido = tecido;
         this.valor = valor;
+        this.quantidadeNoEstoque = quantidadeNoEstoque;
+        this.destaque = destaque;
+        this.idCategoria = idCategoria;
         this.categoria = categoria;
-        this.estoque = estoque;
     }
 
-    // Construtor de cópia para criar um novo ProdutoDTO a partir de outro
-    // ProdutoDTO fornecido
-    public ProdutoDTO(ProdutoDTO produtoDTO) {
-        this.nomeProduto = produtoDTO.nomeProduto;
-        this.cor = produtoDTO.cor;
-        this.tamanho = produtoDTO.tamanho;
-        this.marca = produtoDTO.marca;
-        this.tipo = produtoDTO.tipo;
-        this.valor = produtoDTO.valor;
-        this.categoria = produtoDTO.categoria;
-        this.estoque = produtoDTO.estoque;
+    @JsonIgnore
+    public Integer getId() {
+        return id;
     }
 
-    // Construtor da classe ProdutoDTO que inicializa seus atributos com os valores
-    // correspondentes do objeto Produto fornecido
-    public ProdutoDTO(Produto produto) {
-        this.nomeProduto = produto.getNomeProduto();
-        this.cor = produto.getCor();
-        this.tamanho = produto.getTamanho();
-        this.marca = produto.getMarca();
-        this.tipo = produto.getTipo();
-        this.valor = produto.getValor();
-        this.categoria = produto.getCategoria();
-        this.estoque = produto.isEstoque();
+    @JsonProperty
+    public void setId(Integer id) {
+        this.id = id;
     }
 
+    public boolean isDestaque() {
+        return destaque;
+    }
 
-    // Método estático para converter uma lista de objetos ProdutoDTO em uma nova
-    // lista de ProdutoDTOs
-    public static List<ProdutoDTO> convert(List<ProdutoDTO> produtos) {
-        return produtos.stream().map(ProdutoDTO::new).collect(Collectors.toList());
+    public void setDestaque(boolean destaque) {
+        this.destaque = destaque;
     }
 
     public String getNomeProduto() {
@@ -102,12 +85,12 @@ public class ProdutoDTO {
         this.marca = marca;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getTecido() {
+        return tecido;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setTecido(String tecido) {
+        this.tecido = tecido;
     }
 
     public Double getValor() {
@@ -118,20 +101,29 @@ public class ProdutoDTO {
         this.valor = valor;
     }
 
-    public Categoria getCategoria() {
+    @JsonIgnore
+    public Integer getIdCategoria() {
+        return idCategoria;
+    }
+
+    @JsonProperty
+    public void setIdCategoria(Integer idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    public CategoriaDTO getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(CategoriaDTO categoria) {
         this.categoria = categoria;
     }
 
-    public boolean isEstoque() {
-        return estoque;
+    public Integer getQuantidadeNoEstoque() {
+        return quantidadeNoEstoque;
     }
 
-    public void setEstoque(boolean estoque) {
-        this.estoque = estoque;
+    public void setQuantidadeNoEstoque(Integer quantidadeNoEstoque) {
+        this.quantidadeNoEstoque = quantidadeNoEstoque;
     }
-
 }

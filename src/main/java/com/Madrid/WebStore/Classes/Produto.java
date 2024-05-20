@@ -1,10 +1,10 @@
-// Produto.java
 package com.Madrid.WebStore.Classes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 import java.util.List;
 
@@ -15,27 +15,30 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @NotBlank
+    @NotBlank(message = "O Nome do produto não pode estar em branco")
     private String nomeProduto;
 
-    @NotBlank
+    @NotBlank(message = "A Cor não pode estar em branco")
     private String cor;
 
-    @NotBlank
+    @NotBlank(message = "Tamanho não pode estar em branco")
+    @Pattern(regexp = "^[PMGX]{1,3}$", message = "Tamanho deve ser P, M, G, GG ou XGG")
     private String tamanho;
 
-    @NotBlank
+    @NotBlank(message = "A Marca não pode estar em branco")
     private String marca;
 
-    private String medidas;
-
-    @NotBlank
-    private String tipo;
+    @NotBlank(message = "O Tecido não pode estar em branco")
+    private String tecido;
 
     @NotNull
     private Double valor;
 
-    public boolean estoque;
+    @NotNull
+    private Integer quantidadeNoEstoque;
+
+    @Column(nullable = false)
+    private boolean destaque;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
@@ -43,23 +46,39 @@ public class Produto {
 
     @ManyToMany(mappedBy = "produto")
     @JsonIgnore
-    private List<Cliente> cliente;
+    private List<Cliente> clientes;
 
-    public Produto(Integer id, String nomeProduto, String cor, String tamanho, String marca,
-                   String medidas, String tipo, Double valor, boolean estoque, Categoria categoria) {
-        this.id = id;
+    public Produto() {
+    }
+
+    public Produto(String nomeProduto, String cor, String tamanho, String marca, String tecido, Double valor,
+                   Integer quantidadeNoEstoque, boolean destaque, Categoria categoria, List<Cliente> clientes) {
         this.nomeProduto = nomeProduto;
         this.cor = cor;
         this.tamanho = tamanho;
         this.marca = marca;
-        this.medidas = medidas;
-        this.tipo = tipo;
+        this.tecido = tecido;
         this.valor = valor;
-        this.estoque = estoque;
+        this.quantidadeNoEstoque = quantidadeNoEstoque;
+        this.destaque = destaque;
         this.categoria = categoria;
+        this.clientes = clientes;
     }
 
-    public Produto() {
+    public boolean isDestaque() {
+        return destaque;
+    }
+
+    public void setDestaque(boolean destaque) {
+        this.destaque = destaque;
+    }
+
+    public Integer getQuantidadeNoEstoque() {
+        return quantidadeNoEstoque;
+    }
+
+    public void setQuantidadeNoEstoque(Integer quantidadeNoEstoque) {
+        this.quantidadeNoEstoque = quantidadeNoEstoque;
     }
 
     public Integer getId() {
@@ -94,22 +113,6 @@ public class Produto {
         this.tamanho = tamanho;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    public List<Cliente> getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(List<Cliente> cliente) {
-        this.cliente = cliente;
-    }
-
     public String getMarca() {
         return marca;
     }
@@ -118,20 +121,12 @@ public class Produto {
         this.marca = marca;
     }
 
-    public String getMedidas() {
-        return medidas;
+    public String getTecido() {
+        return tecido;
     }
 
-    public void setMedidas(String medidas) {
-        this.medidas = medidas;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setTecido(String tecido) {
+        this.tecido = tecido;
     }
 
     public Double getValor() {
@@ -142,25 +137,25 @@ public class Produto {
         this.valor = valor;
     }
 
-    public boolean isEstoque() {
-        return estoque = estoque;
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
     }
 
     // Adicionando um método para verificar se o produto está disponível para venda
-    public boolean disponivelParaVenda() {
-        return estoque; // Retorna true se o produto estiver em estoque
-    }
-
-    public void setEstoque(boolean estoque) {
-        this.estoque = estoque;
-    }
-
-    public void ativar() {
-        this.estoque = true;
-    }
-
-    public void desativar() {
-        this.estoque = false;
+    public Integer disponivelParaVenda() {
+        return quantidadeNoEstoque; // Retorna true se o produto estiver em quantidadeNoEstoque
     }
 
 }
