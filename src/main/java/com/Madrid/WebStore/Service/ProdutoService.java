@@ -1,9 +1,7 @@
 package com.Madrid.WebStore.Service;
 
 import com.Madrid.WebStore.Classes.Categoria;
-import com.Madrid.WebStore.Classes.Cliente;
 import com.Madrid.WebStore.Classes.Produto;
-import com.Madrid.WebStore.DTO.CategoriaDTO;
 import com.Madrid.WebStore.DTO.ProdutoDTO;
 import com.Madrid.WebStore.Repositorios.CategoriaRepositorio;
 import com.Madrid.WebStore.Repositorios.ClienteRepositorio;
@@ -12,19 +10,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ProdutoService {
 
     ProdutoRepositorio produtoRepositorio;
-
     ClienteRepositorio clienteRepositorio;
-
     CategoriaRepositorio categoriaRepositorio;
-
     ModelMapper modelMapper;
 
     public ProdutoService(ProdutoRepositorio produtoRepositorio, ClienteRepositorio clienteRepositorio,
@@ -37,7 +30,6 @@ public class ProdutoService {
 
     // Cadastrar Produto ou Atualizar
     public void cadastrarProduto(ProdutoDTO produtoDTO) {
-<<<<<<< HEAD
         // Verifica se a categoria foi especificada
         if (produtoDTO.getIdCategoria() == null) {
             throw new IllegalArgumentException("Id da categoria não pode ser nulo.");
@@ -62,21 +54,11 @@ public class ProdutoService {
         produto.setCategoria(categoria);
 
         // Salva o produto no banco de dados
-=======
-        if (produtoDTO.getIdCategoria() == null) {}
-
-        Categoria categoria = categoriaRepositorio.findById(produtoDTO.getIdCategoria()).orElseThrow();
-
-        Produto produto = modelMapper.map(produtoDTO, Produto.class);
-        produto.setCategoria(categoria);
-
->>>>>>> be03bde298195dfb20c8279c92e7bb80d5668c30
         produtoRepositorio.save(produto);
     }
 
     // Listar Todos os Produtos
     public List<ProdutoDTO> listarTodos() {
-<<<<<<< HEAD
         List<Produto> produtos = produtoRepositorio.findAll();
         List<ProdutoDTO> produtosDTO = new ArrayList<>();
 
@@ -106,16 +88,6 @@ public class ProdutoService {
         Produto produto = produtoRepositorio.findById(id).orElseThrow();
         produto.setDestaque(!produto.isDestaque());
         produtoRepositorio.save(produto);
-=======
-        return produtoRepositorio.findAll().stream()
-                .map(produto -> modelMapper.map(produto, ProdutoDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    // Procurar Produto pelo Nome
-    public List<ProdutoDTO> procurarProdutoPorNome(String nome) {
-        return produtoRepositorio.findByNomeProduto(nome);
->>>>>>> be03bde298195dfb20c8279c92e7bb80d5668c30
     }
 
     // Deletar Produto Pelo Id

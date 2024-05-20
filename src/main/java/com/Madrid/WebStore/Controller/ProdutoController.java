@@ -41,13 +41,10 @@ public class ProdutoController {
         return produtoService.procurarProdutoPorNome(nome);
     }
 
-<<<<<<< HEAD
     // COMENTAR AQUI
     @PutMapping("/alterarTrueOrFalseDestaque/{id}")
     public void alternarDestaqueProduto(@PathVariable Integer id) {
         produtoService.alternarDestaqueProduto(id);
     }
 
-=======
->>>>>>> be03bde298195dfb20c8279c92e7bb80d5668c30
 }

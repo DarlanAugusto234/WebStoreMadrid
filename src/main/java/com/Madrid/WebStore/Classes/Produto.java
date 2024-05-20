@@ -2,7 +2,6 @@ package com.Madrid.WebStore.Classes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -23,11 +22,7 @@ public class Produto {
     private String cor;
 
     @NotBlank(message = "Tamanho não pode estar em branco")
-<<<<<<< HEAD
     @Pattern(regexp = "^[PMGX]{1,3}$", message = "Tamanho deve ser P, M, G, GG ou XGG")
-=======
-    @Pattern(regexp = "^[PMLGX]{1,3}$", message = "Tamanho deve ser P, M, G, GG ou XGG")
->>>>>>> be03bde298195dfb20c8279c92e7bb80d5668c30
     private String tamanho;
 
     @NotBlank(message = "A Marca não pode estar em branco")
@@ -36,7 +31,6 @@ public class Produto {
     @NotBlank(message = "O Tecido não pode estar em branco")
     private String tecido;
 
-<<<<<<< HEAD
     @NotNull
     private Double valor;
 
@@ -45,15 +39,6 @@ public class Produto {
 
     @Column(nullable = false)
     private boolean destaque;
-=======
-    @NotNull(message = "O Valor não pode ser nulo")
-    @Pattern(regexp = "^[0-9]+(\\.[0-9]{1,2})?$", message = "O Valor deve ser um número válido com até duas casas decimais")
-    private Double valor;
-
-    @NotBlank
-    @Min(value = 0, message = "O estoque deve ser um número inteiro não negativo")
-    private Integer estoque;
->>>>>>> be03bde298195dfb20c8279c92e7bb80d5668c30
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
@@ -66,15 +51,8 @@ public class Produto {
     public Produto() {
     }
 
-<<<<<<< HEAD
     public Produto(String nomeProduto, String cor, String tamanho, String marca, String tecido, Double valor,
                    Integer quantidadeNoEstoque, boolean destaque, Categoria categoria, List<Cliente> clientes) {
-=======
-    // Utilizando construtor para inicializar todos os atributos da classe
-
-    public Produto(String nomeProduto, String cor, String tamanho, String marca, String tecido,
-                   Double valor, Integer estoque, Categoria categoria, List<Cliente> clientes) {
->>>>>>> be03bde298195dfb20c8279c92e7bb80d5668c30
         this.nomeProduto = nomeProduto;
         this.cor = cor;
         this.tamanho = tamanho;
@@ -87,7 +65,6 @@ public class Produto {
         this.clientes = clientes;
     }
 
-<<<<<<< HEAD
     public boolean isDestaque() {
         return destaque;
     }
@@ -102,14 +79,6 @@ public class Produto {
 
     public void setQuantidadeNoEstoque(Integer quantidadeNoEstoque) {
         this.quantidadeNoEstoque = quantidadeNoEstoque;
-=======
-    public Integer getEstoque() {
-        return estoque;
-    }
-
-    public void setEstoque(Integer estoque) {
-        this.estoque = estoque;
->>>>>>> be03bde298195dfb20c8279c92e7bb80d5668c30
     }
 
     public Integer getId() {
@@ -186,11 +155,7 @@ public class Produto {
 
     // Adicionando um método para verificar se o produto está disponível para venda
     public Integer disponivelParaVenda() {
-<<<<<<< HEAD
         return quantidadeNoEstoque; // Retorna true se o produto estiver em quantidadeNoEstoque
-=======
-        return estoque; // Retorna true se o produto estiver em estoque
->>>>>>> be03bde298195dfb20c8279c92e7bb80d5668c30
     }
 
 }
