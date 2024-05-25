@@ -2,9 +2,7 @@ package com.Madrid.WebStore.Classes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 
 import java.util.List;
 
@@ -40,6 +38,10 @@ public class Produto {
     @Column(nullable = false)
     private boolean destaque;
 
+    @NotBlank(message = "A Descrição do Produto não pode estar branco")
+    @Size(min = 60, max = 260, message = "A Descrição tem que ter no Min 60 e no Max 260 caracteres")
+    private String descricao;
+
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
@@ -51,8 +53,8 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(String nomeProduto, String cor, String tamanho, String marca, String tecido, Double valor,
-                   Integer quantidadeNoEstoque, boolean destaque, Categoria categoria, List<Cliente> clientes) {
+    public Produto(String nomeProduto, String cor, String tamanho, String marca, String tecido, Double valor, Integer quantidadeNoEstoque,
+                   boolean destaque, String descricao, Categoria categoria, List<Cliente> clientes) {
         this.nomeProduto = nomeProduto;
         this.cor = cor;
         this.tamanho = tamanho;
@@ -61,8 +63,17 @@ public class Produto {
         this.valor = valor;
         this.quantidadeNoEstoque = quantidadeNoEstoque;
         this.destaque = destaque;
+        this.descricao = descricao;
         this.categoria = categoria;
         this.clientes = clientes;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public boolean isDestaque() {

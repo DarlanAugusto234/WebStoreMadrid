@@ -2,6 +2,7 @@ package com.Madrid.WebStore.Service;
 
 import com.Madrid.WebStore.Classes.Produto;
 import com.Madrid.WebStore.DTO.ProdutoDTO;
+import com.Madrid.WebStore.DTO.ProdutoResumoDTO;
 import com.Madrid.WebStore.Repositorios.CategoriaRepositorio;
 import com.Madrid.WebStore.Repositorios.ProdutoRepositorio;
 import org.modelmapper.ModelMapper;
@@ -56,26 +57,17 @@ public class HomeService {
         return produtosDTO;
     }
 
-    // Método para listar produtos por maior valor
-    public List<ProdutoDTO> listarProdutosMaiorValor() {
-        List<Produto> produtos = produtoRepositorio.findAllByOrderByValorDesc();
-        List<ProdutoDTO> produtosDTO = new ArrayList<>();
-        for (Produto produto : produtos) {
-            ProdutoDTO produtoDTO = modelMapper.map(produto, ProdutoDTO.class);
-            produtosDTO.add(produtoDTO);
-        }
-        return produtosDTO;
-    }
+    // Método para buscar um produto pelo ID
+    public ProdutoResumoDTO buscarProdutoPorId(Integer id) {
+        Produto produto = produtoRepositorio.findById(id).orElseThrow();
 
-    // Método para listar produtos por menor valor
-    public List<ProdutoDTO> listarProdutosMenorValor() {
-        List<Produto> produtos = produtoRepositorio.findAllByOrderByValorAsc();
-        List<ProdutoDTO> produtosDTO = new ArrayList<>();
-        for (Produto produto : produtos) {
-            ProdutoDTO produtoDTO = modelMapper.map(produto, ProdutoDTO.class);
-            produtosDTO.add(produtoDTO);
-        }
-        return produtosDTO;
+        ProdutoResumoDTO produtoResumoDTO = new ProdutoResumoDTO();
+        produtoResumoDTO.setNomeProduto(produto.getNomeProduto());
+        produtoResumoDTO.setCategoria(produto.getCategoria().getNomeCategoria());
+        produtoResumoDTO.setValor(produto.getValor());
+        produtoResumoDTO.setDescricao(produto.getDescricao());
+
+        return produtoResumoDTO;
     }
 
 }

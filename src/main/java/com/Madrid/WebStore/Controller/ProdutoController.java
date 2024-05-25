@@ -47,4 +47,16 @@ public class ProdutoController {
         produtoService.alternarDestaqueProduto(id);
     }
 
+    // COMENTAR AQUI
+    @GetMapping("/pesquisarPorMaiorValor")
+    public List<ProdutoDTO> listarProdutosMaiorValor() {
+        return produtoService.listarProdutosMaiorValor();
+    }
+
+    // COMENTAR AQUI
+    @GetMapping("/pesquisarPorMenorValor")
+    public List<ProdutoDTO> listarProdutosMenorValor() {
+        return produtoService.listarProdutosMenorValor();
+    }
+
 }

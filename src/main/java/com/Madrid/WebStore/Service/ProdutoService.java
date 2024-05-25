@@ -8,7 +8,13 @@ import com.Madrid.WebStore.Repositorios.ClienteRepositorio;
 import com.Madrid.WebStore.Repositorios.ProdutoRepositorio;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,6 +94,28 @@ public class ProdutoService {
         Produto produto = produtoRepositorio.findById(id).orElseThrow();
         produto.setDestaque(!produto.isDestaque());
         produtoRepositorio.save(produto);
+    }
+
+    // Método para listar produtos por maior valor
+    public List<ProdutoDTO> listarProdutosMaiorValor() {
+        List<Produto> produtos = produtoRepositorio.findAllByOrderByValorDesc();
+        List<ProdutoDTO> produtosDTO = new ArrayList<>();
+        for (Produto produto : produtos) {
+            ProdutoDTO produtoDTO = modelMapper.map(produto, ProdutoDTO.class);
+            produtosDTO.add(produtoDTO);
+        }
+        return produtosDTO;
+    }
+
+    // Método para listar produtos por menor valor
+    public List<ProdutoDTO> listarProdutosMenorValor() {
+        List<Produto> produtos = produtoRepositorio.findAllByOrderByValorAsc();
+        List<ProdutoDTO> produtosDTO = new ArrayList<>();
+        for (Produto produto : produtos) {
+            ProdutoDTO produtoDTO = modelMapper.map(produto, ProdutoDTO.class);
+            produtosDTO.add(produtoDTO);
+        }
+        return produtosDTO;
     }
 
     // Deletar Produto Pelo Id

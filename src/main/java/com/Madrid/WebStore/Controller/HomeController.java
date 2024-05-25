@@ -1,6 +1,7 @@
 package com.Madrid.WebStore.Controller;
 
 import com.Madrid.WebStore.DTO.ProdutoDTO;
+import com.Madrid.WebStore.DTO.ProdutoResumoDTO;
 import com.Madrid.WebStore.Service.HomeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,16 +30,9 @@ public class HomeController {
         return homeService.listarProdutosDestaque();
     }
 
-    // COMENTAR AQUI
-    @GetMapping("/pesquisarPorMaiorValor")
-    public List<ProdutoDTO> listarProdutosMaiorValor() {
-        return homeService.listarProdutosMaiorValor();
-    }
-
-    // COMENTAR AQUI
-    @GetMapping("/pesquisarPorMenorValor")
-    public List<ProdutoDTO> listarProdutosMenorValor() {
-        return homeService.listarProdutosMenorValor();
+    @GetMapping("/informacoesDoProdutoEmDestaque/{id}")
+    public ProdutoResumoDTO buscarProdutoPorId(@PathVariable Integer id) {
+        return homeService.buscarProdutoPorId(id);
     }
 
 }

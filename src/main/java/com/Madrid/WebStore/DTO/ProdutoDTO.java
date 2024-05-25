@@ -14,6 +14,7 @@ public class ProdutoDTO {
     private Double valor;
     private Integer quantidadeNoEstoque;
     private boolean destaque;
+    private String descricao;
     @JsonIgnore
     private Integer idCategoria;
     private CategoriaDTO categoria;
@@ -22,7 +23,7 @@ public class ProdutoDTO {
     }
 
     public ProdutoDTO(String nomeProduto, String cor, String tamanho, String marca, String tecido, Double valor,
-                      Integer quantidadeNoEstoque, boolean destaque, Integer idCategoria, CategoriaDTO categoria) {
+                      Integer quantidadeNoEstoque, boolean destaque, String descricao, Integer idCategoria, CategoriaDTO categoria) {
         this.nomeProduto = nomeProduto;
         this.cor = cor;
         this.tamanho = tamanho;
@@ -31,6 +32,7 @@ public class ProdutoDTO {
         this.valor = valor;
         this.quantidadeNoEstoque = quantidadeNoEstoque;
         this.destaque = destaque;
+        this.descricao = descricao;
         this.idCategoria = idCategoria;
         this.categoria = categoria;
     }
@@ -43,6 +45,14 @@ public class ProdutoDTO {
     @JsonProperty
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public boolean isDestaque() {
