@@ -47,18 +47,6 @@ public class HomeService {
     }
 
     // Método para listar produtos em destaque
-    public List<ProdutoDTO> listarProdutosDestaque() {
-        List<Produto> produtos = produtoRepositorio.findByDestaqueTrue();
-        List<ProdutoDTO> produtosDTO = new ArrayList<>();
-        for (Produto produto : produtos) {
-            ProdutoDTO produtoDTO = modelMapper.map(produto, ProdutoDTO.class);
-            produtosDTO.add(produtoDTO);
-        }
-        return produtosDTO;
-    }
-
-    // Codigo para Teste de Segunda Feira
-    /*
     public List<ProdutoResumoDTO> listarProdutosDestaque() {
         List<Produto> produtos = produtoRepositorio.findByDestaqueTrue();
         List<ProdutoResumoDTO> produtosDTO = new ArrayList<>();
@@ -66,25 +54,17 @@ public class HomeService {
             ProdutoResumoDTO produtoResumoDTO = new ProdutoResumoDTO();
             produtoResumoDTO.setNomeProduto(produto.getNomeProduto());
             produtoResumoDTO.setCategoria(produto.getCategoria().getNomeCategoria());
-            produtoResumoDTO.setValor(produto.getValor());
+            produtoResumoDTO.setValor(produto.getPreco());
             produtoResumoDTO.setDescricao(produto.getDescricao());
             produtosDTO.add(produtoResumoDTO);
         }
         return produtosDTO;
     }
-    */
 
     // Método para buscar um produto em destaque pelo ID
-    public ProdutoResumoDTO buscarProdutoPorId(Integer id) {
+    public ProdutoDTO buscarProdutoPorId(Integer id) {
         Produto produto = produtoRepositorio.findById(id).orElseThrow();
-
-        ProdutoResumoDTO produtoResumoDTO = new ProdutoResumoDTO();
-        produtoResumoDTO.setNomeProduto(produto.getNomeProduto());
-        produtoResumoDTO.setCategoria(produto.getCategoria().getNomeCategoria());
-        produtoResumoDTO.setValor(produto.getValor());
-        produtoResumoDTO.setDescricao(produto.getDescricao());
-
-        return produtoResumoDTO;
+        return modelMapper.map(produto, ProdutoDTO.class);
     }
 
 }

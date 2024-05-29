@@ -16,21 +16,20 @@ import java.util.List;
 public class Cliente extends Pessoa {
 
     @NotBlank(message = "O Email do Cliente não pode estar em branco")
+    // COMENTAR AQUI
     @Email(message = "O Email do Cliente deve ser válido")
     private String emailCliente;
 
     @NotBlank(message = "A Senha não pode estar em branco")
     @Size(min = 8, max = 20, message = "A Senha deve ter entre 8 e 20 caracteres")
+    // COMENTAR AQUI
     @Pattern(
+            // COMENTAR AQUI
             regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d{4,}).{8,20}$",
             message = "Sua Senha deve conter pelo menos uma letra maiúscula, uma letra minúscula e quatro números")
     private String senhaCliente;
 
     @ManyToMany
-    // Define a tabela de junção para a associação muitos-para-muitos entre Cliente e Produto
-    @JoinTable(name = "Carrinho",
-            joinColumns = @JoinColumn(name = "cliente_id"),
-            inverseJoinColumns = @JoinColumn(name = "produto_id"))
     private List<Produto> produto;
 
     public Cliente() {

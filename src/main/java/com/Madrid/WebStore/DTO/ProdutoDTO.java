@@ -11,30 +11,32 @@ public class ProdutoDTO {
     private String tamanho;
     private String marca;
     private String tecido;
-    private Double valor;
+    private Double preco;
+    @JsonProperty("estoque")
     private Integer quantidadeNoEstoque;
     private boolean destaque;
     private String descricao;
     @JsonIgnore
     private Integer idCategoria;
-    private CategoriaDTO categoria;
+    @JsonProperty("categoria")
+    private String nomeCategoria;
 
     public ProdutoDTO() {
     }
 
-    public ProdutoDTO(String nomeProduto, String cor, String tamanho, String marca, String tecido, Double valor,
-                      Integer quantidadeNoEstoque, boolean destaque, String descricao, Integer idCategoria, CategoriaDTO categoria) {
+    public ProdutoDTO(String nomeProduto, String cor, String tamanho, String marca, String tecido, Double preco,
+                      Integer quantidadeNoEstoque, boolean destaque, String descricao, Integer idCategoria, String nomeCategoria) {
         this.nomeProduto = nomeProduto;
         this.cor = cor;
         this.tamanho = tamanho;
         this.marca = marca;
         this.tecido = tecido;
-        this.valor = valor;
+        this.preco = preco;
         this.quantidadeNoEstoque = quantidadeNoEstoque;
         this.destaque = destaque;
         this.descricao = descricao;
         this.idCategoria = idCategoria;
-        this.categoria = categoria;
+        this.nomeCategoria = nomeCategoria;
     }
 
     @JsonIgnore
@@ -103,12 +105,12 @@ public class ProdutoDTO {
         this.tecido = tecido;
     }
 
-    public Double getValor() {
-        return valor;
+    public Double getPreco() {
+        return preco;
     }
 
-    public void setValor(Double valor) {
-        this.valor = valor;
+    public void setPreco(Double preco) {
+        this.preco = preco;
     }
 
     @JsonIgnore
@@ -121,12 +123,12 @@ public class ProdutoDTO {
         this.idCategoria = idCategoria;
     }
 
-    public CategoriaDTO getCategoria() {
-        return categoria;
+    public String getNomeCategoria() {
+        return nomeCategoria;
     }
 
-    public void setCategoria(CategoriaDTO categoria) {
-        this.categoria = categoria;
+    public void setNomeCategoria(String nomeCategoria) {
+        this.nomeCategoria = nomeCategoria;
     }
 
     public Integer getQuantidadeNoEstoque() {

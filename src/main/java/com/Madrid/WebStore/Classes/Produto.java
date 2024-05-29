@@ -1,6 +1,7 @@
 package com.Madrid.WebStore.Classes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -30,9 +31,10 @@ public class Produto {
     private String tecido;
 
     @NotNull
-    private Double valor;
+    private Double preco;
 
     @NotNull
+    @JsonProperty("estoque")
     private Integer quantidadeNoEstoque;
 
     @Column(nullable = false)
@@ -53,14 +55,14 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(String nomeProduto, String cor, String tamanho, String marca, String tecido, Double valor, Integer quantidadeNoEstoque,
+    public Produto(String nomeProduto, String cor, String tamanho, String marca, String tecido, Double preco, Integer quantidadeNoEstoque,
                    boolean destaque, String descricao, Categoria categoria, List<Cliente> clientes) {
         this.nomeProduto = nomeProduto;
         this.cor = cor;
         this.tamanho = tamanho;
         this.marca = marca;
         this.tecido = tecido;
-        this.valor = valor;
+        this.preco = preco;
         this.quantidadeNoEstoque = quantidadeNoEstoque;
         this.destaque = destaque;
         this.descricao = descricao;
@@ -140,12 +142,12 @@ public class Produto {
         this.tecido = tecido;
     }
 
-    public Double getValor() {
-        return valor;
+    public Double getPreco() {
+        return preco;
     }
 
-    public void setValor(Double valor) {
-        this.valor = valor;
+    public void setPreco(Double preco) {
+        this.preco = preco;
     }
 
     public Categoria getCategoria() {

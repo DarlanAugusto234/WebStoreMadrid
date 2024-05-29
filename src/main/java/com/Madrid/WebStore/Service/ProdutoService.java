@@ -98,7 +98,7 @@ public class ProdutoService {
 
     // Método para listar produtos por maior valor
     public List<ProdutoDTO> listarProdutosMaiorValor() {
-        List<Produto> produtos = produtoRepositorio.findAllByOrderByValorDesc();
+        List<Produto> produtos = produtoRepositorio.findAllByOrderByPrecoDesc();
         List<ProdutoDTO> produtosDTO = new ArrayList<>();
         for (Produto produto : produtos) {
             ProdutoDTO produtoDTO = modelMapper.map(produto, ProdutoDTO.class);
@@ -109,7 +109,7 @@ public class ProdutoService {
 
     // Método para listar produtos por menor valor
     public List<ProdutoDTO> listarProdutosMenorValor() {
-        List<Produto> produtos = produtoRepositorio.findAllByOrderByValorAsc();
+        List<Produto> produtos = produtoRepositorio.findAllByOrderByPrecoAsc();
         List<ProdutoDTO> produtosDTO = new ArrayList<>();
         for (Produto produto : produtos) {
             ProdutoDTO produtoDTO = modelMapper.map(produto, ProdutoDTO.class);

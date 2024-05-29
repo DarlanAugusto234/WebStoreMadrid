@@ -23,9 +23,9 @@ public interface ProdutoRepositorio extends JpaRepository<Produto, Integer> {
     List<Produto> findByMarcaContainingIgnoreCase(String query);
 
     // COMENTAR AQUI
-    List<Produto> findAllByOrderByValorDesc();
+    List<Produto> findAllByOrderByPrecoDesc();
 
-    List<Produto> findAllByOrderByValorAsc();
+    List<Produto> findAllByOrderByPrecoAsc();
 
     // COMENTAR AQUI
     List<Produto> findByDestaqueTrue();

@@ -26,12 +26,13 @@ public class HomeController {
 
     // COMENTAR AQUI
     @GetMapping("/pesquisarDestaques")
-    public List<ProdutoDTO> listarProdutosDestaque() {
+    public List<ProdutoResumoDTO> listarProdutosDestaque() {
         return homeService.listarProdutosDestaque();
     }
 
+    // COMENTAR AQUI
     @GetMapping("/informacoesDoProdutoEmDestaque/{id}")
-    public ProdutoResumoDTO buscarProdutoPorId(@PathVariable Integer id) {
+    public ProdutoDTO buscarProdutoPorId(@PathVariable Integer id) {
         return homeService.buscarProdutoPorId(id);
     }
 

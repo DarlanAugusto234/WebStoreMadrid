@@ -7694,7 +7694,7 @@
 											"top": 474,
 											"width": 231,
 											"height": 13,
-											"text": "+valor: double",
+											"text": "+preco: double",
 											"horizontalAlignment": 0
 										},
 										{
@@ -8671,7 +8671,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGO5Am9C79qT6I="
 							},
-							"name": "valor",
+							"name": "preco",
 							"type": "double"
 						},
 						{
@@ -10017,7 +10017,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGO/FZWxORAVA4="
 							},
-							"name": "valor",
+							"name": "preco",
 							"length": 0
 						},
 						{
