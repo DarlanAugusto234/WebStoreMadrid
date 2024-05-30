@@ -5,7 +5,7 @@ import com.Madrid.WebStore.DTO.ProdutoDTO;
 public class ItemVenda {
 
     private ProdutoDTO produto;
-    private Double valorItens;
+    private Double subTotal;
     private Integer quantidadeDoItem;
 
     public ProdutoDTO getProduto() {
@@ -16,12 +16,12 @@ public class ItemVenda {
         this.produto = produto;
     }
 
-    public Double getValorItens() {
-        return valorItens;
+    public Double getSubTotal() {
+        return subTotal;
     }
 
-    public void setValorItens(Double valorItens) {
-        this.valorItens = valorItens;
+    public void setSubTotal(Double subTotal) {
+        this.subTotal = subTotal;
     }
 
     public Integer getQuantidadeDoItem() {

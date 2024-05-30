@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CarrinhoService {
@@ -34,7 +33,7 @@ public class CarrinhoService {
 
             if (item.getProduto().getId().equals(produtoDTO.getId())) {
                 item.setQuantidadeDoItem(item.getQuantidadeDoItem() + 1);
-                item.setValorItens(item.getQuantidadeDoItem() * produtoDTO.getPreco());
+                item.setSubTotal(item.getQuantidadeDoItem() * produtoDTO.getPreco());
                 return;
             }
 
@@ -46,7 +45,7 @@ public class CarrinhoService {
 
         novoItem.setQuantidadeDoItem(1);
 
-        novoItem.setValorItens(produtoDTO.getPreco());
+        novoItem.setSubTotal(produtoDTO.getPreco());
 
         itens.add(novoItem);
 
@@ -61,7 +60,7 @@ public class CarrinhoService {
 
                 if (item.getQuantidadeDoItem() > 1) {
                     item.setQuantidadeDoItem(item.getQuantidadeDoItem() - 1);
-                    item.setValorItens(item.getQuantidadeDoItem() * item.getProduto().getPreco());
+                    item.setSubTotal(item.getQuantidadeDoItem() * item.getProduto().getPreco());
                 }
 
                 else {

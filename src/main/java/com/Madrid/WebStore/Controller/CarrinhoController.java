@@ -1,5 +1,6 @@
 package com.Madrid.WebStore.Controller;
 
+import com.Madrid.WebStore.Classes.CarrinhoCompra;
 import com.Madrid.WebStore.Classes.ItemVenda;
 import com.Madrid.WebStore.Classes.Produto;
 import com.Madrid.WebStore.Service.CarrinhoService;
@@ -20,20 +21,13 @@ public class CarrinhoController {
 
     // COMENTAR
     @GetMapping("/listarItensDoCarrinho")
-    public Map<String, Object> listarItensDoCarrinho() {
+    public CarrinhoCompra listarItensDoCarrinho() {
+        CarrinhoCompra carrinhoCompra = new CarrinhoCompra();
         List<ItemVenda> itens = carrinhoService.listarItensDoCarrinho();
-        double subTotal = carrinhoService.calcularValorItens();
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("itensCarrinho", itens);
-        response.put("subTotal", subTotal);
-
-        return response;
+        carrinhoCompra.setItens(carrinhoService.listarItensDoCarrinho());
+        carrinhoCompra.setTotal(carrinhoService.calcularValorItens());
+        return carrinhoCompra;
     }
-
-//    public List<ItemVenda> listarItens() {
-//      return carrinhoService.listarItensDoCarrinho();
-//    }
 
     @PostMapping("/adicionarItemAoCarrinho/{id}")
     public void adicionarProdutoAoCarrinho(@PathVariable Integer id) {
