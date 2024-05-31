@@ -5,7 +5,11 @@ import com.Madrid.WebStore.DTO.ProdutoDTO;
 import com.Madrid.WebStore.Service.ProdutoService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -19,7 +23,15 @@ public class ProdutoController {
 
     // Cadastrar Produto
     @PostMapping("/cadastrarProduto")
-    public void cadastrarProduto(@Valid @RequestBody ProdutoDTO produtoDTO) {
+    public void cadastrarProduto(@RequestPart("imagem") MultipartFile imagem, @RequestPart("produto") ProdutoDTO produtoDTO) throws IOException {
+        if(!imagem.isEmpty()){
+            byte[] bytes = imagem.getBytes();
+            String nomeArquivo = imagem.getOriginalFilename();
+            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream("C:\\Users\\CCE\\Desktop\\WebStore\\ImagensRoupas\\"+nomeArquivo));
+            stream.write(bytes);
+            stream.close();
+            produtoDTO.setImagem(nomeArquivo);
+        }
         produtoService.cadastrarProduto(produtoDTO);
     }
 

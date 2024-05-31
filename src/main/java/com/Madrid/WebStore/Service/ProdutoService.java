@@ -42,16 +42,16 @@ public class ProdutoService {
         }
 
         // Busca a categoria no banco de dados
-        Categoria categoria = categoriaRepositorio.findById(produtoDTO.getIdCategoria())
-                .orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada para o id: " + produtoDTO.getIdCategoria()));
+        Categoria categoria = categoriaRepositorio.findById(produtoDTO.getIdCategoria()).orElseThrow();
 
         Produto produto;
         if (produtoDTO.getId() != null) {
             // Se o ID do produto está presente, trata-se de uma atualização
-            produto = produtoRepositorio.findById(produtoDTO.getId())
-                    .orElseThrow(() -> new IllegalArgumentException("Produto não encontrado para o id: " + produtoDTO.getId()));
+            produto = produtoRepositorio.findById(produtoDTO.getId()).orElseThrow();
             modelMapper.map(produtoDTO, produto); // Atualiza o produto existente com os valores do DTO
-        } else {
+        }
+
+        else {
             // Caso contrário, cria um novo produto
             produto = modelMapper.map(produtoDTO, Produto.class);
         }

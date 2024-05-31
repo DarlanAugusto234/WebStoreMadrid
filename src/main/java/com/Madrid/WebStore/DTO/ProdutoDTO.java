@@ -20,12 +20,13 @@ public class ProdutoDTO {
     private Integer idCategoria;
     @JsonProperty("categoria")
     private String nomeCategoria;
+    private String imagem;
 
     public ProdutoDTO() {
     }
 
     public ProdutoDTO(String nomeProduto, String cor, String tamanho, String marca, String tecido, Double preco,
-                      Integer quantidadeNoEstoque, boolean destaque, String descricao, Integer idCategoria, String nomeCategoria) {
+                      Integer quantidadeNoEstoque, boolean destaque, String descricao, Integer idCategoria, String nomeCategoria, String imagem) {
         this.nomeProduto = nomeProduto;
         this.cor = cor;
         this.tamanho = tamanho;
@@ -37,6 +38,7 @@ public class ProdutoDTO {
         this.descricao = descricao;
         this.idCategoria = idCategoria;
         this.nomeCategoria = nomeCategoria;
+        this.imagem = imagem;
     }
 
     @JsonIgnore
@@ -47,6 +49,14 @@ public class ProdutoDTO {
     @JsonProperty
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 
     public String getDescricao() {

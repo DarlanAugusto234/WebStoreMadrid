@@ -1,6 +1,7 @@
 package com.Madrid.WebStore.Classes;
 
 import com.Madrid.WebStore.DTO.ProdutoDTO;
+import jakarta.persistence.*;
 
 public class ItemVenda {
 

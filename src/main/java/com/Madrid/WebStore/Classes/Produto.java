@@ -52,11 +52,13 @@ public class Produto {
     @JsonIgnore
     private List<Cliente> clientes;
 
+    private String imagem;
+
     public Produto() {
     }
 
-    public Produto(String nomeProduto, String cor, String tamanho, String marca, String tecido, Double preco, Integer quantidadeNoEstoque,
-                   boolean destaque, String descricao, Categoria categoria, List<Cliente> clientes) {
+    public Produto(String nomeProduto, String cor, String tamanho, String marca, String tecido, Double preco,
+                   Integer quantidadeNoEstoque, boolean destaque, String descricao, Categoria categoria, List<Cliente> clientes, String imagem) {
         this.nomeProduto = nomeProduto;
         this.cor = cor;
         this.tamanho = tamanho;
@@ -68,6 +70,15 @@ public class Produto {
         this.descricao = descricao;
         this.categoria = categoria;
         this.clientes = clientes;
+        this.imagem = imagem;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 
     public String getDescricao() {
