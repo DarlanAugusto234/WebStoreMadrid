@@ -52,6 +52,10 @@ public class Produto {
     @JsonIgnore
     private List<Cliente> clientes;
 
+    @OneToOne(mappedBy = "produto")
+    @JsonIgnore
+    private ItemVenda itemVenda;
+
     private String imagem;
 
     public Produto() {
@@ -71,6 +75,14 @@ public class Produto {
         this.categoria = categoria;
         this.clientes = clientes;
         this.imagem = imagem;
+    }
+
+    public ItemVenda getItemVenda() {
+        return itemVenda;
+    }
+
+    public void setItemVenda(ItemVenda itemVenda) {
+        this.itemVenda = itemVenda;
     }
 
     public String getImagem() {

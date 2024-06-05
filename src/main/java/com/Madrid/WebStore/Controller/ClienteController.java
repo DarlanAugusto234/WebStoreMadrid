@@ -51,10 +51,4 @@ public class ClienteController {
         clienteService.deletarCliente(id);
     }
 
-    // Adicionando um Produto ao Carrinho do Cliente Pelo Id
-    @PostMapping("/adicionarProdutoAoCarrinho/{clienteId}/{produtoId}")
-    public void adicionarProdutoAoCarrinho(@PathVariable Integer clienteId, @PathVariable Integer produtoId) {
-        clienteService.adicionarProdutoAoCarrinho(clienteId, produtoId);
-    }
-
 }

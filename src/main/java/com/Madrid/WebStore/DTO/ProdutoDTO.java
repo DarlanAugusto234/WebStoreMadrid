@@ -2,8 +2,11 @@ package com.Madrid.WebStore.DTO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
 public class ProdutoDTO {
+
     @JsonIgnore
     private Integer id;
     private String nomeProduto;

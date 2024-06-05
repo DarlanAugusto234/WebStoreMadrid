@@ -1,26 +1,40 @@
 package com.Madrid.WebStore.DTO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class ClienteDTO {
-
+    @JsonIgnore
+    private Integer id;
     private String nome;
     private String endereco;
     private String emailCliente;
     private String telefone;
     private String cpf;
+    @JsonIgnore
     private List<ProdutoDTO> produto;
 
     public ClienteDTO() {}
 
-    public ClienteDTO(String nome, String endereco, String emailCliente,
-                      String telefone, String cpf, List<ProdutoDTO> produto) {
+    public ClienteDTO(String nome, String endereco, String emailCliente, String telefone, String cpf, List<ProdutoDTO> produto) {
         this.nome = nome;
         this.endereco = endereco;
         this.emailCliente = emailCliente;
         this.telefone = telefone;
         this.cpf = cpf;
         this.produto = produto;
+    }
+
+    @JsonIgnore
+    public Integer getId() {
+        return id;
+    }
+
+    @JsonProperty
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {

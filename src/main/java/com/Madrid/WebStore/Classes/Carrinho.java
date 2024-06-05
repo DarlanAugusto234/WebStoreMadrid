@@ -1,11 +1,19 @@
 package com.Madrid.WebStore.Classes;
 
+import jakarta.persistence.Embeddable;
+
 import java.util.List;
 
-public class CarrinhoCompra {
+public class Carrinho {
+
     private Cliente cliente;
+
     private List<ItemVenda> itens;
+
     private double total;
+
+    public Carrinho() {
+    }
 
     public Cliente getCliente() {
         return cliente;
@@ -30,4 +38,6 @@ public class CarrinhoCompra {
     public void setTotal(double total) {
         this.total = total;
     }
+
+
 }

@@ -1,9 +1,7 @@
 package com.Madrid.WebStore.Classes;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -29,6 +27,7 @@ public class Cliente extends Pessoa {
             message = "Sua Senha deve conter pelo menos uma letra maiúscula, uma letra minúscula e quatro números")
     private String senhaCliente;
 
+    @JsonIgnore
     @ManyToMany
     private List<Produto> produto;
 

@@ -1,6 +1,6 @@
 package com.Madrid.WebStore.Controller;
 
-import com.Madrid.WebStore.Classes.CarrinhoCompra;
+import com.Madrid.WebStore.Classes.Carrinho;
 import com.Madrid.WebStore.Classes.ItemVenda;
 import com.Madrid.WebStore.Service.CarrinhoService;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +18,12 @@ public class CarrinhoController {
 
     // COMENTAR
     @GetMapping("/listarItensDoCarrinho")
-    public CarrinhoCompra listarItensDoCarrinho() {
-        CarrinhoCompra carrinhoCompra = new CarrinhoCompra();
+    public Carrinho listarItensDoCarrinho() {
+        Carrinho carrinho = new Carrinho();
         List<ItemVenda> itens = carrinhoService.listarItensDoCarrinho();
-        carrinhoCompra.setItens(carrinhoService.listarItensDoCarrinho());
-        carrinhoCompra.setTotal(carrinhoService.calcularValorItens());
-        return carrinhoCompra;
+        carrinho.setItens(carrinhoService.listarItensDoCarrinho());
+        carrinho.setTotal(carrinhoService.calcularValorItens());
+        return carrinho;
     }
 
     @PostMapping("/adicionarItemAoCarrinho/{id}")
