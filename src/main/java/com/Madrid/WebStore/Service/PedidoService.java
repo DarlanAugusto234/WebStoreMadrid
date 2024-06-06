@@ -44,21 +44,9 @@ public class PedidoService {
         Pedido pedido = modelMapper.map(pedidoDTO, Pedido.class);
         pedido.setCliente(cliente);
 
-        // Inicializa a lista de itens se estiver nula
-        if (pedido.getItens() == null) {
-            pedido.setItens(new ArrayList<>());
-        }
-
-        // Associa cada ItemVenda ao pedido e obtém os itens do PedidoDTO
-        for (ItemVendaDTO itemVendaDTO : pedidoDTO.getItensDTO()) {
-            ItemVenda itemVenda = modelMapper.map(itemVendaDTO, ItemVenda.class);
-            itemVenda.setPedido(pedido);
-            pedido.getItens().add(itemVenda);
-        }
-
-        // Calcula o valor total do pedido
-        double valorTotal = pedido.getItens().stream().mapToDouble(ItemVenda::getSubTotal).sum();
-        pedido.setValorTotal(valorTotal);
+        Carrinho carrinho = carrinhoService.getCarrinho();
+        pedido.setItens(carrinho.getItens());
+        pedido.setValorTotal(carrinho.getTotal());
 
         // Salva o pedido no banco de dados
         pedidoRepositorio.save(pedido);

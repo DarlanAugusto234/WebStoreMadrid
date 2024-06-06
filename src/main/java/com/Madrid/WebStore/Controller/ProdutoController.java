@@ -27,7 +27,7 @@ public class ProdutoController {
         if(!imagem.isEmpty()){
             byte[] bytes = imagem.getBytes();
             String nomeArquivo = imagem.getOriginalFilename();
-            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream("C:\\Users\\CCE\\Desktop\\WebStore\\ImagensRoupas\\"+nomeArquivo));
+            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream("C:\\Users\\ALPHA_INF\\Desktop\\WebStore\\ImagensRoupas\\"+nomeArquivo));
             stream.write(bytes);
             stream.close();
             produtoDTO.setImagem(nomeArquivo);
